@@ -29,15 +29,38 @@
 </html>
 <body class="loading">
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="icon-left image-icon" href="javascript:history.back()"></a>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">44道 JavaScript 面试题</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
     </div>
+    <div class="scrollbar"></div>
+</div>
     <div class="section">
         <div class="article">
-            <div class="main">
-                <div class="content">
-                    <p>44道你应该知道的js面试题  链接： <a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">JavaScript Puzzlers!</a></p>
+    <div class='main'>
+        <h1 class="title">44道 JavaScript 面试题</h1>
+        <div class="stuff">
+            <span>七月 06, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>44道你应该知道的js面试题  链接： <a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">JavaScript Puzzlers!</a></p>
 <h4 id="第1题"><a href="#第1题" class="headerlink" title="第1题"></a>第1题</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>].<span class="built_in">map</span>(<span class="built_in">parseInt</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>// MDN map用法<br>var new_array = arr.map(function callback(currentValue[, index[, array]]) {<br> // Return element for new_array<br>}[, thisArg])</p>
@@ -54,12 +77,39 @@
 <p>instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。<br>null 没有构造函数， 所以  null instanceof Object !== ‘object’</p>
 <p>null 其实并不是一个对象， 但是因为一些古老的原因， typeof null = ‘object’， 这个是个例外， 记住就好了</p>
 
-                </div>
-            </div>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
         </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
     </div>
+    
 </div>
 
+
+    </div>
+</div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
