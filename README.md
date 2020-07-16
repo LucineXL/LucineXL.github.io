@@ -5,6 +5,6 @@
 
 分支：
 
-master：代码分支
-core: 部署分支
+ - master：代码分支
+ - core: 部署分支
 
