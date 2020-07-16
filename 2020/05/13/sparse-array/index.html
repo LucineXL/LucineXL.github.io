@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">js 中的 稀疏数组</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">js 中的 稀疏数组</h1>
+        <div class="stuff">
+            <span>五月 13, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/稀疏数组/">稀疏数组</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>用一段代码开始今天的内容， 下面这段代码的运行结果是什么？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// demo 1</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>).forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123; <span class="built_in">console</span>.log(item, index) &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// demo2</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>).fill(<span class="number">1</span>).forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123; <span class="built_in">console</span>.log(item, index) &#125;)</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gewrlxazofj317m0cmwg5.jpg" alt></p>
+<p>从上面的运行结果看， demo2 是可以正常输出的， 但是 demo1 是不会有输出的。</p>
+<p><code>new Array(5)</code> 生成的数组 在 js 中被称为 <code>稀疏数组</code></p>
+<p>在开始之前， 先看一道题， 本题来自 <a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">44个 Javascript 变态题解析</a></p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line">ary[<span class="number">10</span>] = <span class="number">10</span>;</span><br><span class="line">ary.filter(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>&#123; <span class="keyword">return</span> x === <span class="literal">undefined</span>;&#125;);</span><br></pre></td></tr></table></figure>
+<p>这个题的答案是 []， 你答对了吗？</p>
+<h3 id="JavaScript-中的稀疏数组"><a href="#JavaScript-中的稀疏数组" class="headerlink" title="JavaScript 中的稀疏数组"></a>JavaScript 中的稀疏数组</h3><h4 id="何为稀疏数组？"><a href="#何为稀疏数组？" class="headerlink" title="何为稀疏数组？"></a>何为稀疏数组？</h4><p>稀疏数组是指索引不连续，数组长度大于元素个数的数组，通俗地说就是 有空隙的数组。</p>
+<p>通常来说， 数组的length属性值代表数组中元素的个数。如果数组是稀疏的，length属性值大于元素的个数。</p>
+<h4 id="怎么生成一个稀疏数组？"><a href="#怎么生成一个稀疏数组？" class="headerlink" title="怎么生成一个稀疏数组？"></a>怎么生成一个稀疏数组？</h4><ol>
+<li>构造函数声明一个没有元素的数组</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>)    <span class="comment">// [empty × 5]</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>指定的索引值大于数组长度<br>如果为一个数组元素赋值，它的索引 i 大于或等于现有数组的长度时，length 属性的值将设置为 i+1，中间部分为空</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = []</span><br><span class="line">a[<span class="number">5</span>] = <span class="number">4</span>                <span class="comment">// [empty × 5, 4]</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>指定大于元素个数的数组长度<br>实际上这不会向数组中添加新的元素，它只是在数组尾部创建一个空的区域。</li>
+</ol>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const <span class="keyword">a</span> = []</span><br><span class="line"><span class="keyword">a</span>.<span class="built_in">length</span> = <span class="number">5</span>           <span class="comment"> // [empty × 5]</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>数组直接量中省略值</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">0</span>,,,,]         <span class="comment">// [0, empty × 3]</span></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>删除数组元素<br>对一个数组元素使用 delete 不会修改数组的 length 属性，也不会将元素从高索引处移下来填充已删除属性留下的空白。如果从数组中删除一个元素，它就变成稀疏数组。</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">delete a[<span class="number">4</span>]             <span class="comment">// [0, 1, 2, 3, empty]</span></span><br></pre></td></tr></table></figure>
+<p>上面的代码中有个 <code>empty</code>，这是打印数组输出的值，但是 JavaScript 中并没有这个基础数据类型，那这个 <code>empty</code> 到底是什么呢？看下面的代码：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const <span class="keyword">a</span> = <span class="built_in">new</span> Array(<span class="number">5</span>)</span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">a</span>)    <span class="comment"> // [empty × 5]</span></span><br><span class="line"><span class="keyword">a</span>[<span class="number">0</span>]              <span class="comment"> // undefined</span></span><br></pre></td></tr></table></figure>
+<p>难道 <code>empty</code> === <code>undefined</code>？</p>
+<p>其实并不是这样的，<code>稀疏数组</code>是指数组之间有间隙的数组，<code>empty</code> 的意思是缺失，指这个位置是一个间隙，是没有元素的。 当你访问这个缺失的数据时，JavaScript 会临时给赋值成 <code>undefined</code>。</p>
+<h4 id="稀疏数组的特性"><a href="#稀疏数组的特性" class="headerlink" title="稀疏数组的特性"></a>稀疏数组的特性</h4><p>现在我们知道了什么是稀疏数组，并且知道了怎么去生成一个稀疏数组和它与密集数组的区别，那它都有哪些特性呢？</p>
+<p>首先来普及一下一个知识点，V8 引擎访问对象的两种模式</p>
+<ul>
+<li>Dictionary mode（字典模式）</li>
+<li>Fast mode（快速模式）</li>
+</ul>
+<p>解释一下这两种模式</p>
+<ul>
+<li>Dictionary mode（字典模式）：字典模式也成为哈希表模式，V8 引擎使用哈希表来存储对象。</li>
+<li>Fast mode（快速模式）：快速模式使用类似 C 语言的 struct 来表示对象，如果你不知道什么是 struct，可以理解为是只有属性没有方法的 class</li>
+</ul>
+<p><code>稀疏数组</code> 则是采用的字典模式存储的，而这种模式的数据访问速度会比较慢</p>
+<p>网上找到的相关测试图片：<br><img src="https://camo.githubusercontent.com/00fb0f85604cfec2331c16c3dd9b4a745e114d8b/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f31363736373330312d626633386634383238313436343333382e706e673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430" alt></p>
+<p>足够稀疏的数组通常在实现上比稠密的数组更慢、内存利用率更高，在这样的数组中查找元素的时间与常规对象属性的查找时间一样长。</p>
+<p>所以在使用稀疏数组时， 最好还是考虑一下， 是不是真的有必要使用稀疏数组。</p>
+<h3 id="稀疏数组-和-密集数组"><a href="#稀疏数组-和-密集数组" class="headerlink" title="稀疏数组 和 密集数组"></a>稀疏数组 和 密集数组</h3><p><code>密集数组</code>：数组元素之间是紧密相连的，不存在空隙，也就是我们平时常用的数组</p>
+<h4 id="稀疏数组-和-密集数组的区别"><a href="#稀疏数组-和-密集数组的区别" class="headerlink" title="稀疏数组 和 密集数组的区别"></a>稀疏数组 和 密集数组的区别</h4><p>稀疏数组和密集数组的本质区别就是数组元素间是否是紧密相连的。 他们在使用 <code>Array</code>的常用方法时， 也存在一些差异</p>
+<ul>
+<li><code>forEach</code> 遍历</li>
+</ul>
+<p>在遍历到稀疏数组的缺失元素时，回调函数是不会执行的, 所以这就解释了上面的 demo1 为什么不会正常打印</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const a = <span class="literal">[<span class="number">1</span>,,<span class="number">3</span>,,]</span></span><br><span class="line">a.for<span class="constructor">Each(<span class="params">i</span> =&gt; &#123; <span class="params">console</span>.<span class="params">log</span>(<span class="params">i</span>)</span> &#125;) <span class="comment">// 1 3   // 只会打印出不缺失位置的元素</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>map</code> 与 <code>filter</code></li>
+</ul>
+<p><code>map</code>不会遍历缺失元素，但返回的结果具有与源数组相同的长度和空隙</p>
+<p><code>filter</code>缺失的元素会过滤掉</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>,,,,<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">a.map(<span class="function"><span class="params">i</span> =&gt;</span> i)     <span class="comment">// [1, empty × 3, 5]</span></span><br><span class="line"></span><br><span class="line">a.filter(<span class="function"><span class="params">i</span> =&gt;</span> i)  <span class="comment">// [1, 5]</span></span><br></pre></td></tr></table></figure>
+<p>到这里， 开篇的那道题， 最后的结果为什么是 [] 就明白啦， 因为缺失的元素被过滤掉了~</p>
+<ul>
+<li><code>for-in</code> 与 <code>for-of</code></li>
+</ul>
+<p><code>for-in</code> 与上面类似</p>
+<p><code>for-of</code> 则会将缺失的元素输出位 <code>undefined</code></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>,,,,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">in</span> a) &#123; console.log(i) &#125;    <span class="comment">// 0 4</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i of a) &#123; console.log(i) &#125;    <span class="comment">// 1 undefined undefined undefined 5</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>join</code><br>缺失元素的位置会被保留</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>,,,,<span class="number">5</span>]</span><br><span class="line">a.join()  <span class="comment">// 1,,,,5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sort</code><br>会正常排序，但不会对缺失元素排序，会返回与源数组相同的长度</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">5</span>,,,,<span class="number">1</span>]</span><br><span class="line">a.sort()  <span class="comment">// [1, 5, empty × 3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tips: 我们可以使用 <code>in</code> 查看一个索引值是否是数组的属性， 稀疏数组中为empty的索引是不能被查出来的</p>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">const</span> <span class="string">arr</span> <span class="string">=</span> <span class="string">[1,,,,5];</span></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="string">in</span> <span class="string">arr</span>    <span class="string">//</span> <span class="literal">true</span></span><br><span class="line"><span class="number">2</span> <span class="string">in</span> <span class="string">arr</span>    <span class="string">//</span> <span class="literal">false</span></span><br><span class="line"><span class="number">4</span> <span class="string">in</span> <span class="string">arr</span>    <span class="string">//</span> <span class="literal">true</span></span><br><span class="line"><span class="number">8</span> <span class="string">in</span> <span class="string">arr</span>    <span class="string">//</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="稀疏数组转密集数组"><a href="#稀疏数组转密集数组" class="headerlink" title="稀疏数组转密集数组"></a>稀疏数组转密集数组</h3><p>如果我们拿到了一个稀疏数组， 那么怎么把他转换成一个密集数组呢~</p>
+<ol>
+<li>Array.prototype.apply</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成一个稀疏数组</span></span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr);     <span class="comment">//  [empty x 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 进行转换</span></span><br><span class="line">arr = <span class="built_in">Array</span>.apply(<span class="literal">null</span>, arr);</span><br><span class="line"><span class="built_in">console</span>.log(arr);     <span class="comment">//  [undefined, undefined, undefined, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Array.prototype.from</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成一个稀疏数组</span></span><br><span class="line">let arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">delete arr[<span class="number">2</span>];</span><br><span class="line">arr[<span class="number">5</span>] = <span class="number">5</span>;</span><br><span class="line">console.log(arr);   <span class="comment">// [1, 2, empty × 3, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 进行转化</span></span><br><span class="line">arr = Array.<span class="keyword">from</span>(arr);</span><br><span class="line">console.log(arr);   <span class="comment">// [1, 2, undefined, undefined, undefined, 5]</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用 <code>...</code> 运算符</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成一个稀疏数组</span></span><br><span class="line">let arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,,,,];</span><br><span class="line">console.log(arr);   <span class="comment">// [1, 2, 3, empty × 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 进行转化</span></span><br><span class="line">arr = [...arr];</span><br><span class="line">console.log(arr);   <span class="comment">// [1, 2, 3, undefined, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>

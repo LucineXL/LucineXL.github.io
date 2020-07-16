@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">webpack:url-loader 图片路径问题</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">webpack:url-loader 图片路径问题</h1>
+        <div class="stuff">
+            <span>九月 03, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/loader/">loader</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>我们使用webpack打包项目中，在处理图片路径时， 最常用的loader有两种， url-loader 和 file-loader。</p>
+<p>我们在写项目中引用路径的时候，填写的URL是基于我们开发时的路径， 但是在webpack打包时， 会将各个模块打包成一个文件，里面引用的路径是相对于入口html文件，并不是相对于我们的原始文件路径的。loader 可以解析项目中引入的URL，并且根据配置，把图片拷贝到相应路径， 再将打包后的文件中的路径 替换为图像的最终路径。 </p>
+<p>file-loader 和 url-loader 都可以解决这个问题。 但是url-loader会将引入的图片进行编码， 我们引用的时候只需要引入这个文件就可以访问图片了， 可以大大减少 HTTP请求的次数。</p>
+<p>url-loader 封装了 file-loader， 但并不依赖他， 所以我们可以只需要安装 url-loader就可以了。</p>
+<p>在使用url-loader时，出现了 路径引用错误的 情况。</p>
+<ol>
+<li>问题复现</li>
+</ol>
+<p>webpack.prod.js</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    rules: [</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        &#123;</span><br><span class="line">        test: /\.(png|svg|jpg|gif)<span class="symbol">$</span>/,</span><br><span class="line">        use: [</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            &#123;</span><br><span class="line">                loader: <span class="string">'url-loader'</span>, <span class="comment">//是指定使用的loader和loader的配置参数</span></span><br><span class="line">                <span class="keyword">options</span>: &#123;</span><br><span class="line">                    limit:<span class="number">500</span>,  <span class="comment">//是把小于500B的文件打成Base64的格式，写入JS</span></span><br><span class="line">                    name: <span class="string">'images/[name]_[hash:7].[ext]'</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            test: /\.(css)<span class="symbol">$</span>/,</span><br><span class="line">            use: [</span><br><span class="line">                MiniCssExtractPlugin.loader,</span><br><span class="line">                &#123;</span><br><span class="line">                    loader: <span class="string">'css-loader'</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDom <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.scss'</span>;</span><br><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">'./logo.png'</span>;</span><br><span class="line"></span><br><span class="line">ReactDom.render(</span><br><span class="line">    &lt;div&gt;Hello world</span><br><span class="line">        &lt;img src=&#123;logo&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;,</span></span><br><span class="line"><span class="regexp">    document.getElementById("root")</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+<p>index.css</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#root</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: aqua;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'./logo.png'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>打包后的 css 文件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#root</span>&#123;<span class="attribute">background</span>:<span class="built_in">url</span>(images/logo_e179a47.png);<span class="attribute">color</span>:<span class="number">#0ff</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>打包后 的 文件结构</p>
+<p>── css<br>│   └── app.9fd7e730df40df61cc5a.css<br>├── images<br>│   └── logo_e179a47.png<br>├── js<br>│    └── app.382da24eb9c30ee2.js<br>└── index.html</p>
+<p>我们在浏览器中打开打包后的 index.html</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/9/3/1659f420ecd33c50?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>可以看出我们在index.js 中 引入的图片是可以正常加载的， 但是我们在css中引入的背景图 并没有加载成功。</p>
+<ol start="2">
+<li>问题原因</li>
+</ol>
+<p>webpack 在 打包时， 首先会把图片 复制到 /dist/images/ 文件夹下， 然后把 css 文件中的url 路径 替换为webpack中options的name属性指向的路径，即 /images/logo.png, 但是这个路径是相对路径，是相对于 /dist/css/~.css 来说的， 所以此处引用的 文件地址为： /dist/css/images/logo.jpg。 但是我们打包后的css 文件夹中， 并没有 images/logo.png, 所以图片并没有渲染出来。<br>但是 对于 我们 index.js 中 引用的图片， 此处相对路径是相对于 index.html 来说的， 所以 是可以取到图片的。</p>
+<ol start="3">
+<li>解决方式</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">    <span class="attribute">test</span>: /\.(css)$/,</span><br><span class="line">    use: [</span><br><span class="line">        &#123;</span><br><span class="line">            loader: MiniCssExtractPlugin.loader,</span><br><span class="line">            options: &#123;</span><br><span class="line">                publicPath: <span class="string">'../'</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attribute">loader</span>: <span class="string">'css-loader'</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>在为css文件配置 loader时， 添加 publicPath 属性。 这样做， 我们在图片打包时， 仍会将图片复制在 /dist/images/ 文件夹之下， 但是 在css文件中引用时， 会将路径替换为  publicPath + name。</p>
+<p>打包后的 css 文件：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#root</span>&#123;<span class="attribute">background</span>:<span class="built_in">url</span>(../images/logo_e179a47.png);<span class="attribute">color</span>:<span class="number">#0ff</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>至此， 项目中 css 的文件引用路径 和 js 中的文件引用路径 均为正确的图片路径。 </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
