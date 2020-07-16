@@ -1,7 +1,7 @@
 
-# blog
+# 个人博客
 
-个人博客： [地址][https://lucinexl.github.io]
+地址： https://lucinexl.github.io
 
 分支：
 
