@@ -1,0 +1,36 @@
+<div id="tags"">
+  <%- partial("_partial/post/header")%>
+  <div class="article">
+    <div class="main">
+      <h1 class="title">
+        Tags<div class="subTitle">您一共创建了<%= site.tags.length %>个标签</div>
+      </h1>
+      <div id='tag_cloud'>
+        <% site.tags.map(function(tag){ %>
+          <span class="tag_item">
+            <a href="#<%= tag.name %>" title="<%= tag.name %>" rel="<%= tag.length %>"><%= tag.name %></a>
+          </span>
+        <% }) %>
+      </div>
+
+      <% site.tags.map(function(tag){ %>
+        <div class="one-tag-list">
+            <div class="fa fa-tag tag-icon tag_item" id="<%= tag.name %>">
+                <span class="tag-text"><%= tag.name %></span>
+            </div>
+            <% tag.posts.sort("date", "desc").map(function(post){ %>
+              <div class="post-preview">
+                  <a href="<%- config.root %><%- post.path %>">
+                      <h2 class="tag-post-title"><%- post.title || "Untitled" %></h2>
+                      <% if (post.subtitle && post.subtitle.length) { %>
+                      <h3 class="tag-post-subtitle"><%- post.subtitle %></h3>
+                      <% } %>
+                  </a>
+              </div>
+          <% }) %>
+        </div>
+      <% }) %>
+    </div> 
+  </div>
+</div>
+    

@@ -1,0 +1,7 @@
+node_modules
+*.log
+public/
+.deploy*/
+Thumbs.db
+db.json
+.vscode
