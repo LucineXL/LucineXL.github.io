@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">一个例子深入浅出 Render Props 和 HOC</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">一个例子深入浅出 Render Props 和 HOC</h1>
+        <div class="stuff">
+            <span>四月 24, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HOC/">HOC</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/React/">React</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Render-Props/">Render Props</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h3><p>假设目前有这样的一个需求，有一个后台管理系统， 里面有很多功能结构类似的列表， 每个列表都是进入页面后请求接口， 然后根据获取到的数据对列表进行渲染， 然后列表还包括一些简单的排序， 分页等功能。</p>
+<p>这种最简单的实现方式就是在每个列表中把这些功能都实现一遍。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// list A</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListA</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 列表通用逻辑</span></span><br><span class="line">    handleSearch = () =&gt; &#123;&#125;</span><br><span class="line">    handleChangePage = () =&gt; &#123;&#125;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        const &#123; list &#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            <span class="comment">// 列表A渲染</span></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// list B</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListB</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 列表通用逻辑</span></span><br><span class="line">    handleSearch = () =&gt; &#123;&#125;</span><br><span class="line">    handleChangePage = () =&gt; &#123;&#125;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        const &#123; list &#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            <span class="comment">// 列表B渲染</span></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">list <span class="type">C</span>, list <span class="type">D</span>....</span><br></pre></td></tr></table></figure>
+<p>这样正常使用是没有问题了， 可是用这样的实现方式， 写了太多的重复代码，身为一个追求完美的程序员， 自然是要追求更高级的实现方式~</p>
+<p>React的高级组件有两种实现方式：</p>
+<ol>
+<li>Render Props</li>
+<li>高阶组件 HOC</li>
+</ol>
+<h3 id="Render-Props"><a href="#Render-Props" class="headerlink" title="Render Props"></a>Render Props</h3><h4 id="什么是-Render-Props"><a href="#什么是-Render-Props" class="headerlink" title="什么是 Render Props"></a>什么是 Render Props</h4><p>Render props 是 React 16 + 之后出现的新特性。 官方是这样解释的:</p>
+<blockquote>
+<p>“render prop” 是指一种简单的技术，用于使用一个值为函数的 prop 在 React 组件之间的代码共享。</p>
+</blockquote>
+<p>通俗一点解释， 就是一个组件， 接受一个名为render的props属性， render是一个函数， 会在组件render 的时候调用，而不是实现自己的渲染逻辑。</p>
+<p>看到这里， 还是有点一头雾水的感觉， react 不是 本来就有组件之间的封装和嵌套吗，为什么非要通过这种方式给一个组件注入另一个组件的代码呢？官方是这样解释的:</p>
+<blockquote>
+<p>render prop 是一个组件用来了解要渲染什么内容的函数 prop。</p>
+</blockquote>
+<p>所以， 再通俗的解释， 当一个组件的基础功能是提供“可变数据”， 不知道自己需要渲染什么东西的时候， 具体的展示可以从外部注入。</p>
+<p>我们可以通过上面的例子来加深理解</p>
+<h4 id="Render-Props的使用"><a href="#Render-Props的使用" class="headerlink" title="Render Props的使用"></a>Render Props的使用</h4><p>在上面的例子中， 列表获取、分页、筛选等功能都是相同的，没有必要再使用的时候一遍又一遍的重复写这些逻辑。</p>
+<p>如果能把这些逻辑提取成公共组件的话， 那样就完美了。</p>
+<p>可是如果提取成公共组件的话， 每个列表的渲染是不同的， 这段又不能被封装进公共部分，这个时候， 就可以使用 <code>Render Props</code> 了。</p>
+<p>我们可以提供一个带有函数 props 的 ConmmonList 组件， 他能够根据我们的需要进行动态渲染。</p>
+<p>实现方式：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConmmonList</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 列表通用逻辑</span></span><br><span class="line">    handleSearch = () =&gt; &#123;&#125;</span><br><span class="line">    handleChangePage = () =&gt; &#123;&#125;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        const &#123; list, render &#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="keyword">this</span>.props.render(list) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListA</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;<span class="type">ConmmonList</span> render=&#123;(list) =&gt; (&lt;<span class="type">ListARender</span> list=&#123;list&#125; &gt;)&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListB</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;<span class="type">ConmmonList</span> render=&#123;(list) =&gt; (&lt;<span class="type">ListBRender</span> list=&#123;list&#125; &gt;)&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ListC, ListD ...</span></span><br></pre></td></tr></table></figure>
+<p><code>render props</code> 的好处在于， 不需要通过“混入”或者装饰来共享组件行为，一个普通组件只需要一个函数 prop 就能够进行一些 state 共享。</p>
+<p>子组件（上例中的ConmmonList） 通过 render 方法将自己的state暴露给了父组件（ListA, listB）, 我们就可以在父组件中随意使用这个state， 组件之间的通信变得简单并且优雅。</p>
+<h4 id="使用-Props-而非-render"><a href="#使用-Props-而非-render" class="headerlink" title="使用 Props 而非 render"></a>使用 Props 而非 render</h4><p>我们只是把这种模式成为 <code>render props</code>, 传入组件中的props 不一定非要叫 render，换成 childer或者其他的名字都可以。</p>
+<p>既然说到了<code>children</code>, 那么这个children和普通的children有什么不一样呢，  普通的children的使用：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;<span class="keyword">div</span>&gt;&#123;<span class="keyword">this</span>.props.children&#125;&lt;<span class="keyword">div</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>普通的children 是一个react element， 不需要函数调用， 可以直接使用， 但是如果我们使用 <code>render props</code>， 那么传入的 children 是一个函数， 所以最好在propTypes 里声明 children 应为一个函数类型。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">Mouse</span>.</span></span>propTypes = &#123;</span><br><span class="line">  children: <span class="module-access"><span class="module"><span class="identifier">PropTypes</span>.</span></span>func.isRequired</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="警告-在-React-PureComponent-中使用-render-props-要注意"><a href="#警告-在-React-PureComponent-中使用-render-props-要注意" class="headerlink" title="警告: 在 React.PureComponent 中使用 render props 要注意"></a>警告: 在 React.PureComponent 中使用 render props 要注意</h4><p>我们在<code>render props</code> 时， 每次向子组件（上例中的 commonList）中传入的render函数 是一个匿名函数， 如果子组件（commonList）使用了react.pureComponent,  因为pureComponent 是进行了浅比较， 所以每次新的匿名函数和上次都不会相等， 那么组件每次都会重新render，pureComponent 也就不会生效了</p>
+<p>解决方法： 把render方法也用变量存一下就可以了</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListA</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">    renderList = (list) =&gt; (&lt;<span class="type">ListARender</span> list=&#123;list&#125; &gt;);</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;<span class="type">ConmmonList</span> render=&#123;<span class="keyword">this</span>.renderList&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="高阶组件-Higher-Order-Component（-HOC-）"><a href="#高阶组件-Higher-Order-Component（-HOC-）" class="headerlink" title="高阶组件 - Higher Order Component（ HOC ）"></a>高阶组件 - Higher Order Component（ HOC ）</h3><h4 id="什么是高阶组件"><a href="#什么是高阶组件" class="headerlink" title="什么是高阶组件"></a>什么是高阶组件</h4><p>在介绍高阶组件之前， 我们先来说一下高阶函数（ Higher-Order Function）。</p>
+<p>通俗的解释， 高阶函数是一个接收函数作为参数或者将函数作为返回输出的函数。</p>
+<p>比如<code>Array.prototype.map</code>，<code>Array.prototype.filter</code>，<code>Array.prototype.reduce</code> 和 <code>Array.prototype.sort</code>都是JavaScript中内置的高阶函数，它们接受一个函数作为参数，并应用这个函数到列表的每一个元素。</p>
+<p>而高阶组件类似于高阶函数，就是一个函数，接收一个react组件作为参数， 返回另一个新的react组件。 高阶组件本质上来说，就是高阶函数。</p>
+<h4 id="高阶组件的使用"><a href="#高阶组件的使用" class="headerlink" title="高阶组件的使用"></a>高阶组件的使用</h4><p>通过高阶组件的方式解决上面的问题</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function withSearchList(<span class="type">Component</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="title">ConmmonList</span> <span class="keyword">extends</span> <span class="title">Components</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 列表通用逻辑</span></span><br><span class="line">        handleSearch = () =&gt; &#123;&#125;</span><br><span class="line">        handleChangePage = () =&gt; &#123;&#125;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        render() &#123;</span><br><span class="line">            const &#123; list &#125; = <span class="keyword">this</span>.state;</span><br><span class="line">            <span class="keyword">return</span> &#123; &lt;<span class="type">Component</span> list=&#123;list&#125; /&gt; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>不要再render中调用HOC</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    <span class="keyword">const</span> withSearchList = withSearchList(Component);</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">withSearchList</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在render中调用HOC， 每次组件render时， 都会重新创建一个新的 withSearchList， 子组件每次都会卸载重新挂载， 这样不仅影响性能， 同样会导致子组件中的状态丢失。</p>
+<p>所以 在使用的时候只需要在组件外部使用HOC， 只需要创建一次HOC就可以了</p>
+<ol start="2">
+<li>复制静态方法</li>
+</ol>
+<p>在使用HOC对组件进行包装时， 并不会将原始组件的静态方法包装在内， 需要手动把静态方法进行拷贝</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义静态函数</span></span><br><span class="line"><span class="type">Component</span>.staticMethod = function() &#123;<span class="comment">/*...*/</span>&#125;</span><br><span class="line"><span class="comment">// 现在使用 HOC</span></span><br><span class="line">const searchListCompnent = withSearchList(<span class="type">Component</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增强组件没有 staticMethod</span></span><br><span class="line">typeof searchListCompnent.staticMethod === <span class="symbol">'undefine</span>d' <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 手动绑定静态方法</span></span><br><span class="line">function withSearchList(<span class="type">Component</span>) &#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">WithSearchList</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;<span class="comment">/*...*/</span>&#125;</span><br><span class="line">    <span class="comment">// 必须准确知道应该拷贝哪些方法 :</span></span><br><span class="line">    <span class="type">WithSearchList</span>.staticMethod = <span class="type">Component</span>.staticMethod;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">WithSearchList</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Refs 不会被传递</li>
+</ol>
+<p>虽然高阶组件的约定是将所有 props 传递给被包装组件，但这对于 refs 并不适用。那是因为 ref 实际上并不是一个 prop - 就像 key 一样，它是由 React 专门处理的。如果将 ref 添加到 HOC 的返回组件中，则 ref 引用指向容器组件，而不是被包装组件。</p>
+<h3 id="Render-props-与-HOC"><a href="#Render-props-与-HOC" class="headerlink" title="Render props 与 HOC"></a>Render props 与 HOC</h3><p>这两种方式都可以实现我们的需求， 那么这种实现方式有什么区别呢</p>
+<p>在使用HOC时， 存在一个问题。</p>
+<p>假设我们一个组件， 在经过了多个HOC封装之后， 最终得到了目标组件， 目标组件与初始组件相比， 很多属性发生了变化， 但是在目标组件中， 我们并不能明确的知道， 某个属性来自于那个HOC。 除此之外， 如果在HOC封装过程中， 不同的HOC存在相同的属性， 后面的HOC会将之前的HOC中相同名字的属性覆盖掉， 无法追溯。</p>
+<p>但是这个问题在Render props中是不存在的， render props 父组件与子组件通过render方法共享state，不会因为重名出现属性覆盖的问题， 况且永远可以追溯。</p>
+<p>Render props 和 HOC 都可以实现高级组件的功能， 至于要选择使用哪一个， 就具体情况具体分析呗~</p>
+<blockquote>
+<p>参考文章：</p>
+<ol>
+<li><a href="https://zh-hans.reactjs.org/docs/higher-order-components.html" target="_blank" rel="noopener">React 高阶组件 官方文档</a></li>
+<li><a href="http://react.caibaojian.com/docs/render-props.html" target="_blank" rel="noopener">React Render props 官方文档</a></li>
+</ol>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>

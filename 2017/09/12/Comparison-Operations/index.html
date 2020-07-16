@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">浅析js中的 “==” 与 “===”</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">浅析js中的 “==” 与 “===”</h1>
+        <div class="stuff">
+            <span>九月 12, 2017</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/javaScript/">javaScript</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>关于js 中的 == 与 ===，之前踩了不少坑，特意在这里整理一下他们的用法。</p>
+<a id="more"></a>
+<p>在js中，’==’ 和 ‘===’运算符用来比较两个值是否相等，但是他们对于相等的定义是不同的。两个运算符都可以用来比较任意类型的操作数，如果两个操作数相等，返回true，否则，返回false。’===’ 严格相等运算符，用来比较两个操作数是否严格相等。’==’ 相等运算符，用来比较两个操作数是否相等。<br>详细信息可参照ECMA标准（[戳这里][<a href="http://www.ecma-international.org/ecma-262/6.0/]）。" target="_blank" rel="noopener">http://www.ecma-international.org/ecma-262/6.0/]）。</a></p>
+<h3 id="Abstract-Equality-Comparison"><a href="#Abstract-Equality-Comparison" class="headerlink" title="Abstract Equality Comparison  =="></a>Abstract Equality Comparison  ==</h3><p>== 相等操作符，在比较前会把比较的两个数转换成相同的数据类型之后，然后对两个数进行比较。转换后，比较方式与 === 相同。</p>
+<p>ECMA中比较规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">The comparison x == y, where x and y are <span class="keyword">values</span>, produces <span class="literal">true</span> <span class="keyword">or</span> false.</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> ReturnIfAbrupt(x).</span><br><span class="line"><span class="number">2.</span> ReturnIfAbrupt(y).</span><br><span class="line"><span class="number">3.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> the same <span class="keyword">as</span> <span class="keyword">Type</span>(y), <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">Return</span> the <span class="keyword">result</span> <span class="keyword">of</span> performing <span class="keyword">Strict</span> Equality Comparison x === y.</span><br><span class="line"><span class="number">4.</span> <span class="keyword">If</span> x <span class="keyword">is</span> <span class="literal">null</span> <span class="keyword">and</span> y <span class="keyword">is</span> undefined, <span class="keyword">return</span> true.</span><br><span class="line"><span class="number">5.</span> <span class="keyword">If</span> x <span class="keyword">is</span> undefined <span class="keyword">and</span> y <span class="keyword">is</span> <span class="literal">null</span>, <span class="keyword">return</span> true.</span><br><span class="line"><span class="number">6.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="built_in">Number</span> <span class="keyword">and</span> <span class="keyword">Type</span>(y) <span class="keyword">is</span> <span class="keyword">String</span>,</span><br><span class="line">    <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison x == ToNumber(y).</span><br><span class="line"><span class="number">7.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="keyword">String</span> <span class="keyword">and</span> <span class="keyword">Type</span>(y) <span class="keyword">is</span> <span class="built_in">Number</span>,</span><br><span class="line">    <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison ToNumber(x) == y.</span><br><span class="line"><span class="number">8.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="built_in">Boolean</span>, <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison ToNumber(x) == y.</span><br><span class="line"><span class="number">9.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(y) <span class="keyword">is</span> <span class="built_in">Boolean</span>, <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison x == ToNumber(y).</span><br><span class="line"><span class="number">10.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> either <span class="keyword">String</span>, <span class="built_in">Number</span>, <span class="keyword">or</span> Symbol <span class="keyword">and</span> <span class="keyword">Type</span>(y) <span class="keyword">is</span> <span class="keyword">Object</span>, <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison x == ToPrimitive(y).</span><br><span class="line"><span class="number">11.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="keyword">Object</span> <span class="keyword">and</span> <span class="keyword">Type</span>(y) <span class="keyword">is</span> either <span class="keyword">String</span>, <span class="built_in">Number</span>, <span class="keyword">or</span> Symbol, <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> the <span class="keyword">result</span> <span class="keyword">of</span> the comparison ToPrimitive(x) == y.</span><br><span class="line"><span class="number">12.</span> <span class="keyword">Return</span> false.</span><br></pre></td></tr></table></figure>
+<p>翻译如下：</p>
+<p>比较 x == y，当x 和 y是正常值时，返回 true 或者 false。</p>
+<ol>
+<li>如果x不是正常值（比如抛出一个错误），中断执行。</li>
+<li>如果y不是正常值，中断执行。</li>
+<li>如果Type(x)与Type(y)相同，执行严格相等运算x === y。</li>
+<li>如果x为null且y为undefined，则返回true。</li>
+<li>如果x为undefined，y为null，则返回true。</li>
+<li>如果Type（x）是Number，Type（y）是String，返回比较结果 x == ToNumber（y）。</li>
+<li>如果Type（x）是String，Type（y）是Number，返回比较结果ToNumber（x）== y。</li>
+<li>如果Type（x）为Boolean，则返回比较结果ToNumber（x）== y。</li>
+<li>如果Type（y）为Boolean，则返回比较结果x == ToNumber（y）。</li>
+<li>如果Type（x）为String，Number或Symbol，Type（y）为Object，则返回比较的结果x == ToPrimitive（y）。</li>
+<li>如果Type（x）是Object，Type（y）是String，Number或Symbol，那么<br>返回比较结果ToPrimitive（x）== y。</li>
+<li>返回假。</li>
+</ol>
+<p>简化一下 ，可以理解为：</p>
+<ol>
+<li>如果两个操作数类型相同，则进行 x===y。</li>
+<li>如果一个为null，另一个为undefined，则返回true。</li>
+<li>如果两个操作数均为基本数据类型，则把操作数转换为Number类型进行比较。</li>
+<li>如果其中有一个操作数为Object，则调用对象的 toString 或者 valueOf 方法，将对象转化为原始值进行比较。</li>
+<li>如果不满足上述任何情况，则返回 false。</li>
+</ol>
+<h3 id="Strict-Equality-Comparison-‘-’"><a href="#Strict-Equality-Comparison-‘-’" class="headerlink" title="Strict Equality Comparison ‘===’"></a>Strict Equality Comparison ‘===’</h3><p>‘===’ 严格相等操作符，用来比较两个操作数是否严格相等。</p>
+<p>ECMA中比较规则如下：<br><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> different <span class="keyword">from</span> <span class="keyword">Type</span>(y), <span class="keyword">return</span> <span class="keyword">false</span>.</span><br><span class="line"><span class="number">2.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> Undefined, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line"><span class="number">3.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="keyword">Null</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line"><span class="number">4.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> Number, <span class="keyword">then</span></span><br><span class="line">    a. <span class="keyword">If</span> x <span class="keyword">is</span> <span class="keyword">NaN</span>, <span class="keyword">return</span> <span class="keyword">false</span>.</span><br><span class="line">    b. <span class="keyword">If</span> y <span class="keyword">is</span> <span class="keyword">NaN</span>, <span class="keyword">return</span> <span class="keyword">false</span>.</span><br><span class="line">    c. <span class="keyword">If</span> x <span class="keyword">is</span> the same Number <span class="keyword">value</span> <span class="keyword">as</span> y, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line">    d. <span class="keyword">If</span> x <span class="keyword">is</span> +<span class="number">0</span> <span class="keyword">and</span> y <span class="keyword">is</span> −<span class="number">0</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line">    e. <span class="keyword">If</span> x <span class="keyword">is</span> −<span class="number">0</span> <span class="keyword">and</span> y <span class="keyword">is</span> +<span class="number">0</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line">    f. <span class="keyword">Return</span> <span class="keyword">false</span>.</span><br><span class="line"><span class="number">5.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> String, <span class="keyword">then</span></span><br><span class="line">    a. <span class="keyword">If</span> x <span class="keyword">and</span> y are exactly the same <span class="keyword">sequence</span> <span class="keyword">of</span> code units (same length <span class="keyword">and</span> same code           units at corresponding indices), <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line">    b. <span class="keyword">Else</span>, <span class="keyword">return</span> <span class="keyword">false</span>.</span><br><span class="line"><span class="number">6.</span> <span class="keyword">If</span> <span class="keyword">Type</span>(x) <span class="keyword">is</span> <span class="type">Boolean</span>, <span class="keyword">then</span></span><br><span class="line">    a. <span class="keyword">If</span> x <span class="keyword">and</span> y are <span class="keyword">both</span> <span class="keyword">true</span> <span class="keyword">or</span> <span class="keyword">both</span> <span class="keyword">false</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line">    b. <span class="keyword">Else</span>, <span class="keyword">return</span> <span class="keyword">false</span>.</span><br><span class="line"><span class="number">7.</span> <span class="keyword">If</span> x <span class="keyword">and</span> y are the same Symbol <span class="keyword">value</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line"><span class="number">8.</span> <span class="keyword">If</span> x <span class="keyword">and</span> y are the same <span class="keyword">Object</span> <span class="keyword">value</span>, <span class="keyword">return</span> <span class="keyword">true</span>.</span><br><span class="line"><span class="number">9.</span> <span class="keyword">Return</span> <span class="keyword">false</span>.</span><br></pre></td></tr></table></figure></p>
+<p>翻译：</p>
+<ol>
+<li>如果Type（x）与Type（y）不同，则返回false。</li>
+<li>如果Type（x）为Undefined，则返回true。</li>
+<li>如果Type（x）为Null，则返回true。</li>
+<li>如果Type（x）是Number，那么<br> a. 如果x是NaN，则返回false。<br> b. 如果y是NaN，则返回false。<br> c. 如果x与y的Number值相同，则返回true。<br> d. 如果x为+0且y为-0，则返回true。<br> e. 如果x是-0而y是+0，则返回true。<br> f. 返回假。</li>
+<li>如果Type（x）是String，那么<br> a. 如果x和y是完全相同的代码单元序列（相同长度和相应索引处的相同代码单位），则返回true。<br> b. 否则返回假。</li>
+<li>如果Type（x）为Boolean，则<br> a.如果x和y都为true或都为false，则返回true。<br> b.否则返回假。</li>
+<li>如果x和y是相同的符号值，则返回true。</li>
+<li>如果x和y是相同的Object值，则返回true。</li>
+<li>返回假。</li>
+</ol>
+<p>简化一下，可以理解为：</p>
+<ol>
+<li>如果两个操作数类型不相同，返回false。</li>
+<li>undefined === undefined   =&gt; true</li>
+<li>null === null   =&gt; true</li>
+<li>如果操作数的数据类型都为Number，当两个数的值相同时，返回true， 否则返回 false。<br> 注： -0 === +0   =&gt; true     +0 === -0 =&gt; true<pre><code>NaN 与任何值都不相等，包括他自己。 所以要判断一个数值是否为NaN， 可采用 x !== x ,只有NaN 返回true
+</code></pre></li>
+<li>如果操作数的数据类型都为String或Boolean时，只有x和y完全相同，返回ture。</li>
+<li>如果操作数的数据类型都为Object，只有两个操作数指向的地址完全相同时，返回true，否则返回false。</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>

@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">从零开始学Flutter (2)   Flutter 开发环境搭建</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">从零开始学Flutter (2)   Flutter 开发环境搭建</h1>
+        <div class="stuff">
+            <span>八月 22, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/flutter/">flutter</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>往期链接：</p>
+<ul>
+<li><a href="https://lucinexl.github.io/2019/08/21/flutter1/">从零开始学Flutter (1) 初识Flutter</a></li>
+</ul>
+<h3 id="Flutter-开发环境搭建"><a href="#Flutter-开发环境搭建" class="headerlink" title="Flutter 开发环境搭建"></a>Flutter 开发环境搭建</h3><p>flutter官网上讲述了 windows， macos, linux 三种操作系统的搭建方法， 本篇文章只讲述 <code>macos</code> 的搭建过程， 其他系统配置请参考官网。</p>
+<p>安装flutter所需系统要求：</p>
+<p>要安装并运行Flutter，您的开发环境必须满足以下最低要求:</p>
+<ul>
+<li>操作系统: macOS (64-bit)</li>
+<li>磁盘空间: 700 MB (不包括Xcode或Android Studio的磁盘空间）.</li>
+<li>工具: Flutter 依赖下面这些命令行工具.<ul>
+<li><code>bash</code>, <code>mkdir</code>, <code>rm</code>, <code>git</code>, <code>curl</code>, <code>unzip</code>, <code>which</code></li>
+</ul>
+</li>
+</ul>
+<p>注意： 在环境配置的过程中， 需要用到brew， 没有安装的需要安装一下哦~ 鉴于这个与本文关系不大， 就不在这里介绍了，有需要请百度~~</p>
+<h4 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h4><p>由于在国内访问Flutter有时可能会受到限制，Flutter官方为中国开发者搭建了临时镜像，大家可以将如下环境变量加入到用户环境变量中：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">PUB_HOSTED_URL</span>=https://pub.flutter-io.cn</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">FLUTTER_STORAGE_BASE_URL</span>=https://storage.flutter-io.cn</span><br></pre></td></tr></table></figure>
+<p>注意： 此镜像为临时镜像，并不能保证一直可用，读者可以参考详情请参考 <a href="https://github.com/flutter/flutter/wiki" target="_blank" rel="noopener">Using Flutter in China</a> 以获得有关镜像服务器的最新动态。</p>
+<h5 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h5><ol>
+<li><p>使用vim打开配置文件，在打开的文件中添加镜像配置代码。<br>注意： bash 和 zsh 的配置文件是不同的。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bash */</span></span><br><span class="line"><span class="symbol">vim</span> ~/.<span class="keyword">bash_profile</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">/* </span>zsh */</span><br><span class="line"><span class="symbol">vim</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置完成后， 使用<code>source</code>命令重新加载一下配置文件</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bash */</span></span><br><span class="line"><span class="keyword">source</span> ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment">/* zsh */</span></span><br><span class="line"><span class="keyword">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="获取Flutter-SDK"><a href="#获取Flutter-SDK" class="headerlink" title="获取Flutter SDK"></a>获取Flutter SDK</h4><ol>
+<li>官网下载最新的安装包  <a href="https://flutter.dev/docs/development/tools/sdk/releases?tab=macos#macos" target="_blank" rel="noopener">戳这里~</a></li>
+</ol>
+<p>flutter分为四个版本： <code>stabel</code>, <code>beta</code>, <code>dev</code>, <code>master</code>, 推荐使用<code>stabel</code>分支， 这是flutter的稳定分支</p>
+<ol start="2">
+<li>解压安装包到你想安装的目录，如：</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/flutter</span><br><span class="line">unzip ~/Downloads/flutter_macos_v1<span class="number">.7</span><span class="number">.8</span>+hotfix<span class="number">.4</span>-stable.zip</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>添加<code>flutter</code>相关工具到path中, 配置flutter命令在任何地方都可以使用:</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=`pwd`/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>pwd 这个命令本指当前路径，在这里是指 flutter 的安装路径， 比如我的路径为： ~/flutter， 那么代码为：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=~/flutter/flutter/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>到此为止， flutter的安装工作就完成了， 但是还不具备开发环境，但是还不能进行开发。可以使用 <code>flutter -h</code>来检测一下。<br>安装成功后， 出现下面的结果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf500cn5myj30u00zydx2.jpg" alt></p>
+<h4 id="安装Xcode"><a href="#安装Xcode" class="headerlink" title="安装Xcode"></a>安装Xcode</h4><p> 要为iOS开发Flutter应用程序，您需要Xcode 9.0或更高版本，可在应用商店下载， 此处不在介绍。 但是需要注意的是， 运行xcode需要统一xcode许可协议， 可通过打开一次xcode应用或者命令<code>sudo xcodebuild -license</code>进行同意。</p>
+<h4 id="检查开发环境"><a href="#检查开发环境" class="headerlink" title="检查开发环境"></a>检查开发环境</h4><p>上面说到， 我们安装好了flutter， 但是还不具备开发环境， 因为我们在开发中还需要用到很多插件和软件， 具体需要的插件和软件可以通过 <code>flutter doctor</code> 命令来进行检查。</p>
+<p>运行结果如图：<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf500tivqzj31tc0os7qo.jpg" alt><br>这部分是安卓相关的， 当前先拿ios版本的试试手， 安卓相关的先暂且放一下，日后会继续更新~</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf501c0odnj312v0u04qp.jpg" alt></p>
+<p>大概意思就是我们还需要这些软件，请使用brew进行安装。<br>整个安装过程没有任何技术含量， 但是无奈网速太渣渣， 这个过程耗了我半个多下午才搞定。<br>这里值得一提的是， 在安装cocoapods 时， 执行 pod setup这个命令的时候，真的是非常非常的慢， 还老是跑到一半程序就崩溃报错了， 后来谷歌发现了一个比较靠谱的办法， <a href="https://lucinexl.github.io/2019/08/22/pod-setup/">详情请戳~</a></p>
+<p>这一系列的命令结束后， 执行<code>flutter doctor</code> 无报错后， 我们的安装就接近尾声啦~</p>
+<h4 id="IDE配置与使用"><a href="#IDE配置与使用" class="headerlink" title="IDE配置与使用"></a>IDE配置与使用</h4><p>理论上可以使用任何文本编辑器与命令行工具来构建Flutter应用程序。 不过，Flutter官方建议使用Android Studio和VS Code之一以获得更好的开发体验。Flutter官方提供了这两款编辑器插件，通过IDE和插件可获得代码补全、语法高亮、widget编辑辅助、运行和调试支持等功能，可以帮助我们极大的提高开发效率。</p>
+<p>我使用的是VS code, 所以接下来介绍一下 vscode 的配置与使用。</p>
+<h5 id="安装flutter-插件"><a href="#安装flutter-插件" class="headerlink" title="安装flutter 插件"></a>安装flutter 插件</h5><ol>
+<li>启动 VS code</li>
+<li>调用 View&gt;Command Palette…, (command + shift + p), 输入 ‘install’, 然后选择 Extensions: Install Extension action。<br>更加简单方便的方法： 点击 vscode 左侧图标， 进入插件安装页面</li>
+<li>在搜索框输入 <code>flutter</code> ，在搜索结果列表中选择 <code>Flutter</code>, 然后点击 Install。</li>
+<li>安装成功 重启 编辑器生效</li>
+<li>验证配置：<ul>
+<li>调用 View&gt;Command Palette…</li>
+<li>输入 ‘doctor’, 然后选择 ‘Flutter: Run Flutter Doctor’ action。</li>
+<li>查看“OUTPUT”窗口中的输出是否有问题</li>
+</ul>
+</li>
+</ol>
+<h5 id="创建flutter应用"><a href="#创建flutter应用" class="headerlink" title="创建flutter应用"></a>创建flutter应用</h5><ol>
+<li>启动 VS Code</li>
+<li>调用 View&gt;Command Palette…</li>
+<li>输入 ‘flutter’, 然后选择 ‘Flutter: New Project’ action</li>
+<li>输入 Project 名称 (如myapp), 然后按回车键</li>
+<li>指定放置项目的位置，然后按蓝色的确定按钮</li>
+<li>等待项目创建继续，并显示main.dart文件</li>
+</ol>
+<h5 id="体验热重载"><a href="#体验热重载" class="headerlink" title="体验热重载"></a>体验热重载</h5><ol>
+<li>打开lib/main.dart文件。</li>
+<li>将字符串 ‘You have pushed the button this many times:’ 更改为 ‘You have clicked the button this many times:’。</li>
+<li>不要按“停止”按钮; 让您的应用继续运行。</li>
+<li>要查看您的更改，请调用 Save (cmd-s / ctrl-s), 或者点击 热重载按钮 (绿色圆形箭头按钮)。</li>
+</ol>
+<p>如图：<br><img src="https://user-gold-cdn.xitu.io/2019/8/22/16cb9cedafbb7565?w=566&amp;h=76&amp;f=png&amp;s=6096" alt></p>
+<h5 id="启动IOS模拟器"><a href="#启动IOS模拟器" class="headerlink" title="启动IOS模拟器"></a>启动IOS模拟器</h5><p>创建应用成功后， 点击左侧 debugger 按钮， 可调用xcode启动ios模拟器</p>
+<p>1.在你的MAC上，通过 Spotlight 或以下命令找到模拟器：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">open</span> -<span class="keyword">a</span> Simulator</span><br></pre></td></tr></table></figure>
+<p>2.通过检查模拟器 Hardware &gt; Device 菜单中的设置，确保模拟器正在使用64位设备（iPhone 5s或更高版本）。</p>
+<p>  可使用 <code>xcrun instruments -s</code> 命令查看可选择的模拟器机型列表。</p>
+<p>  每一种设备都有一个唯一的id， 即下图中红框标识出来的部分。</p>
+<p>   <img src="https://user-gold-cdn.xitu.io/2019/8/22/16cb9dd899b54087?w=1280&amp;h=288&amp;f=png&amp;s=117877" alt></p>
+<p>  可通过<code>xcrun instruments -w &lt;deviceId&gt;</code> 命令启动模拟设备。 如 <code>xcrun instruments -w D5E1929F-2973-4DD2-9A84-D89B7E7C1F4</code></p>
+<p>3.运行 <code>flutter run</code>启动flutter应用程序，也可通过<code>flutter run -d &lt;deviceId&gt;</code>启动某种特定设备类型。</p>
+<p>也可直接使用vscode 左侧的debugger启动模拟器， 如下图：<br><img src="https://user-gold-cdn.xitu.io/2019/8/22/16cb9ca245470940?w=1848&amp;h=1004&amp;f=png&amp;s=238331" alt></p>
+<p>启动成功后， 我们的第一个flutter应用到此就正式跑起来啦~   效果如图：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/22/16cb9cc4c5b3ec34?w=762&amp;h=1622&amp;f=png&amp;s=92542" alt></p>
+<h5 id="启动IOS真机"><a href="#启动IOS真机" class="headerlink" title="启动IOS真机"></a>启动IOS真机</h5><p>在执行<code>flutter doctor</code>的时候， 我们安装了很多东西， 其中 ios tools 那一部分的相关依赖 现在就能派上用场啦~</p>
+<ol>
+<li>在Flutter项目目录中通过 <code>open ios/Runner.xcworkspace</code> 打开默认的Xcode workspace.</li>
+<li>在Xcode中，选择导航面板左侧中的Runner项目， 点击 Runner， 进入Runner target设置页面， 在 General &gt; Signing &gt; Team 下选择开发团队。 当选择一个团队后，Xcode会创建并下载开发证书，向你的设备注册你的帐户，并创建和下载配置文件（如果需要）。</li>
+<li>要开始您的第一个iOS开发项目，您可能需要使用您的Apple ID登录Xcode， 如图：<br><img src="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action/docs/imgs/1-5.png" alt><br>开发完成的app要想上架到 app store, 还需要注册Apple开发者计划， 这就不详细介绍了</li>
+<li>到此为止， 我们就可以连接用手机连接电脑， 连接成功后，需要同时信任你的Mac和该设备上的开发证书。 同意之后就可以再真机上看见我们的第一个app啦~~</li>
+</ol>
+<p>到此为止， 我们的flutter 从安装到第一个应用程序跑起来就圆满成功啦~~</p>
+<hr>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://flutterchina.club/" target="_blank" rel="noopener">flutter 中文网</a></li>
+<li><a href="https://book.flutterchina.club/" target="_blank" rel="noopener">flutter 实战</a></li>
+<li><a href="https://juejin.im/book/5c5423ef6fb9a049cd54a213" target="_blank" rel="noopener">Flutter 完全手册(掘金小册)</a></li>
+<li><a href="https://jspang.com/posts/2019/01/20/flutter-base.html" target="_blank" rel="noopener">Flutter免费视频第一季-环境搭建  （大佬技术胖 出品)</a></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
