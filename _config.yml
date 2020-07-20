@@ -79,7 +79,7 @@ theme: diaspora
 deploy:
   type: git
   repo: https://github.com/LucineXL/LucineXL.github.io.git
-  branch: core
+  branch: master
 
 jsonContent:
     meta: false
