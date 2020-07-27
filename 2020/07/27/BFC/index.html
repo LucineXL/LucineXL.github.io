@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">BFC的二三事</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">BFC的二三事</h1>
+        <div class="stuff">
+            <span>七月 27, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/BFC/">BFC</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css/">css</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>BFC是css中一个比较经常被问到的概念， 这次，我们来彻底搞懂他</p>
+<h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><p>css盒模型描述了通过 文档树中的元素 以及相应的 视觉格式化模型 所生成的矩形盒子。 浏览器在渲染页面时， 浏览器的渲染引擎会根据盒模型将所有元素表示为一个个矩形的盒子， 盒子的外观由css 控制</p>
+<p>一个标准的盒子由四部分组成， 由内向外包括： <code>content(内容)</code>, <code>padding(内边距)</code>, <code>border(边框)</code>, <code>margin(外边距)</code></p>
+<p>如下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5lu41o5fj30ua0le75s.jpg" alt></p>
+<p>盒模型分两种， <code>标准盒模型</code> 和 <code>怪异盒模型</code></p>
+<p>标准盒模型： 盒子的宽高只包括内容部分</p>
+<p>标准盒模型可以通过<code>box-sizing: content-box</code>，默认即为标准盒模型</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5m4vtpssj31i00qo0yt.jpg" alt></p>
+<p>怪异盒模型： 盒子的宽高除了包括内容部分外， 还包括padding和border</p>
+<p>怪异盒模型可以通过<code>box-sizing: border-box</code>设置</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5m6vbilzj31hc0pogr6.jpg" alt></p>
+<h3 id="视觉格式化模型"><a href="#视觉格式化模型" class="headerlink" title="视觉格式化模型"></a>视觉格式化模型</h3><p>css 的视觉格式化模型描述了盒子是怎样生成的， 简单来说， 他定义了盒子的计算规则， 通过规则 文档元素转换成一个个的盒子</p>
+<p>每个盒子的布局由<code>尺寸</code>，<code>类型</code>，<code>定位</code>，<code>盒子的子元素或兄弟元素</code>，<code>视口的尺寸和位置</code>等因素决定。</p>
+<p>视觉格式化模型的计算，取决于一个矩形的边界，这个边界，就是 <code>包含块( containing block )</code>：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在上面的代码中， <code>div</code> 和 <code>p</code> 都是包含块, div 是 p 的包含块， p又是span 的包含块</p>
+<p>盒子不受包含块的限制，当盒子的布局跑到包含块的外面时，就是我们说的溢出（overflow）</p>
+<p>盒子的生成由视觉格式化模型定义生成， 盒子又包含几种不同的类型， 盒子的类型取决于display属性</p>
+<ul>
+<li><p>块盒子  display:  block | list-item | table</p>
+<ul>
+<li>一个块级元素会被格式化成一个块，默认按照垂直方向依次排列。</li>
+<li>每个块级盒都会参与 BFC 的创建。</li>
+</ul>
+</li>
+<li><p>行内盒子  display: inline | inline-block | inline-table</p>
+<ul>
+<li>行内元素不会生成内容块，但是可以与其他行内级内容一起显示为多行。</li>
+<li>行内级元素会生成行内级盒子，该盒子参与 IFC 的创建。</li>
+</ul>
+</li>
+<li><p>匿名盒子</p>
+<ul>
+<li>匿名盒子会从父元素继承可继承属性，其他属性保持默认值initial。</li>
+<li>通常CSS引擎会自动为直接包含在块盒子中的文本创建一个匿名盒子。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">   这是一个匿名盒子</span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span> 这是一个块盒子 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">span</span>&gt;</span> 这是一个行内盒子 <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   这是另一个匿名盒子</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="渲染文档流"><a href="#渲染文档流" class="headerlink" title="渲染文档流"></a>渲染文档流</h3><p>CSS 页面布局技术允许我们拾取网页中的元素，并且控制它们相对正常布局流（普通流）、周边元素、父容器或者主视口/窗口的位置。技术布局从宏观上来说是受定位方案影响，定位方案包括普通流（Normal Flow，也叫常规流，正常布局流），浮动（Float），定位技术（Position）。</p>
+<h4 id="普通流"><a href="#普通流" class="headerlink" title="普通流"></a>普通流</h4><p>在普通流的块格式化上下文中，盒子在垂直方向依次排列。<br>在普通流的行内格式化上下文中，盒子则水平排列。<br>当 CSS 的 position 属性为 static 或 relative，并且 float 为 none 时，其布局方式也为普通流。<br>当 position 为 relative 时为相对定位，此时该盒子还会根据 top、bottom、left 和 right 属性的值在其原本所在的位置上产生指定大小的偏移，即使有偏移，仍然保留原有的位置，其它元素不能占用这个位置。</p>
+<h4 id="浮动流"><a href="#浮动流" class="headerlink" title="浮动流"></a>浮动流</h4><p>一个盒子的 float 值不为 none，并且其 position 为 static 或 relative 时，该盒子为浮动流。<br>在浮动流中，浮动盒子会浮动到当前行的开始或尾部位置。这会导致普通流中的元素会“流”到浮动盒子的边缘处（被浮动影响），除非元素通过 clear 清除了前面的浮动。<br>如果将 float 设置为 left，浮动盒子会流到当前行盒子的开始位置（左侧）;<br>如果设置为 right，浮动盒子会流到当前行盒子的尾部位置（右侧）;<br>不管是左浮动还是右浮动，行盒子都会伸缩以适应浮动盒子的大小。</p>
+<h4 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h4><p>如果元素的 position 为 absolute（绝对定位） 或 fixed（固定定位），该元素为定位模式。</p>
+<p>定位模式有四种：<code>静态定位</code>，<code>相对定位</code>，<code>绝对定位</code>，<code>固定定位</code>。</p>
+<ol>
+<li>静态定位</li>
+</ol>
+<p>默认的定位方式（position为static），此时元素处于普通流中。</p>
+<ol start="2">
+<li>相对定位</li>
+</ol>
+<p>相对定位通常用来对布局进行微调，position为relative时，元素使用相对定位，此时可以通过top，right，bottom，left属性对元素的位置进行微调，设置其相对于自身的偏移量。</p>
+<ol start="3">
+<li>绝对定位</li>
+</ol>
+<p>绝对定位方案中，盒会从普通流中移除，不会影响其他普通流的布局。绝对定位具有以下特点：</p>
+<ul>
+<li>元素的属性position为absolute或fixed时，它是绝对定位元素</li>
+<li>它的定位相对于它的包含块，可以通过 top，right，bottom，left 属性对元素的位置进行微调，设置其相对于包含块的偏移量</li>
+<li>position为absolute的元素，其定位将相对于最近的一个relative、fixed或absolute的父元素，如果没有则相对于body</li>
+</ul>
+<ol start="4">
+<li>固定定位<br>与绝对定位方案类似，唯一的区别在于，它的包含块是浏览器视窗。</li>
+</ol>
+<h3 id="BFC是什么"><a href="#BFC是什么" class="headerlink" title="BFC是什么"></a>BFC是什么</h3><p>BFC(Block Formatting Context)，我们可以拆开理解，FC 表示 <code>Formatting Context</code> 格式化上下文，是 W3C 规范中的一个概念，用于决定块级盒的布局及浮动相互影响范围的一个区域。决定了内部的盒子如何排列，它对外面的元素不会产生任何影响。</p>
+<p>最常见的格式化上下文有 BFC、IFC、FFC、GFC。</p>
+<p>BFC(Block Formatting Context) 块级格式化上下文<br>IFC(Inline Formatting Context) 内联格式化上下文<br>FFC(Flex Formatting Context) 弹性格式化上下文<br>GFC(Grid Formatting Context) 栅格格式化上下文</p>
+<h4 id="BFC的创建"><a href="#BFC的创建" class="headerlink" title="BFC的创建"></a>BFC的创建</h4><p>以下元素会创建 BFC， 详情请参照 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">MDN 块格式化上下文</a></p>
+<ul>
+<li>根元素（<html>）</html></li>
+<li>浮动元素（元素的 float 不是 none）</li>
+<li>绝对定位元素（元素的 position 为 absolute 或 fixed）</li>
+<li>行内块元素（元素的 display 为 inline-block）</li>
+<li>表格单元格（元素的 display 为 table-cell，HTML表格单元格默认为该值）</li>
+<li>表格标题（元素的 display 为 table-caption，HTML表格标题默认为该值）</li>
+<li>匿名表格单元格元素（元素的 display 为 table、table-row、 table-row-group、table-header-group、table-footer-group（分别是HTML table、row、tbody、thead、tfoot 的默认属性）或 inline-table）</li>
+<li>overflow 值不为 visible 的块元素</li>
+<li>display 值为 flow-root 的元素</li>
+<li>contain 值为 layout、content 或 paint 的元素</li>
+<li>弹性元素（display 为 flex 或 inline-flex 元素的直接子元素）</li>
+<li>网格元素（display 为 grid 或 inline-grid 元素的直接子元素）</li>
+<li>多列容器（元素的 column-count 或 column-width 不为 auto，包括 column-count 为 1）</li>
+<li>column-span 为 all 的元素始终会创建一个新的BFC，即使该元素没有包裹在一个多列容器中（标准变更，Chrome bug）。</li>
+</ul>
+<p>以上是 CSS2.1 规范定义的 BFC 触发方式，在最新的 CSS3 规范中，弹性元素和网格元素会创建 F(Flex)FC 和 G(Grid)FC。(下文会讲到)</p>
+<h4 id="BFC的特性"><a href="#BFC的特性" class="headerlink" title="BFC的特性"></a>BFC的特性</h4><ul>
+<li>BFC内部的块级盒会在垂直方向上一个接一个排列。（普通流）</li>
+<li>计算BFC的高度时，浮动元素也会参与计算。</li>
+<li>同一BFC下的相邻块级元素可能发生外边距折叠。(float可以避免外边距折叠 或者 打破同一BFC的结构)</li>
+<li>BFC元素不会和它的子元素发生外边距折叠。</li>
+<li>浮动盒的区域不会和BFC重叠。</li>
+<li>BFC是一个独立的容器外面的元素不会影响BFC内部反之亦然。</li>
+</ul>
+<h3 id="IFC"><a href="#IFC" class="headerlink" title="IFC"></a>IFC</h3><p>如何创建一个IFC布局：</p>
+<p>行内块元素（元素的 display 为 inline-block）</p>
+<h4 id="IFC的特性"><a href="#IFC的特性" class="headerlink" title="IFC的特性"></a>IFC的特性</h4><ul>
+<li>在行内格式化上下文中，盒(box)一个接一个地水平排列，起点是包含块的顶部</li>
+<li>水平方向上的 margin，border 和 padding在盒之间得到保留</li>
+<li>盒在垂直方向上可以以不同的方式对齐</li>
+</ul>
+<h3 id="FFC"><a href="#FFC" class="headerlink" title="FFC"></a>FFC</h3><p>如何创建一个FFC布局：</p>
+<p>弹性元素（display 为 flex 或 inline-flex）</p>
+<h3 id="GFC"><a href="#GFC" class="headerlink" title="GFC"></a>GFC</h3><p>如何创建一个GFC布局：</p>
+<p>网格元素（display 为 grid 或 inline-grid）</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
