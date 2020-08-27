@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">初探AST和babel</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">初探AST和babel</h1>
+        <div class="stuff">
+            <span>八月 24, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/AST/">AST</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/babel/">babel</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>第一眼看见AST的时候， 并不是很清楚这是个什么， 只是隐隐记得， 大学里<code>编译原理</code> 好像学过， 但是并不是太清楚这个东西有什么用。 可是， 简单的了解一下才发现，原来我们的编码过程中， 处处都有他的身影</p>
+<h3 id="1-什么是抽象语法树-（AST）"><a href="#1-什么是抽象语法树-（AST）" class="headerlink" title="1. 什么是抽象语法树 （AST）"></a>1. 什么是抽象语法树 （AST）</h3><p>AST官方定义：</p>
+<p>在计算机科学中，抽象语法树（abstract syntax tree或者缩写为AST），或者语法树（syntax tree），是源代码的抽象语法结构的树状表现形式，这里特指编程语言的源代码。</p>
+<p>之所以说语法是「抽象」的，是因为这里的语法并不会表示出真实语法中出现的每个细节。</p>
+<h3 id="2-使用场景"><a href="#2-使用场景" class="headerlink" title="2. 使用场景"></a>2. 使用场景</h3><ul>
+<li>代码语法的检查， 代码格式化， 风格检查， 代码高亮，错误代码提示， 代码自动补全</li>
+<li>代码压缩</li>
+<li>Babel 编译 ES6 语法</li>
+</ul>
+<h3 id="3-生成-AST"><a href="#3-生成-AST" class="headerlink" title="3. 生成 AST"></a>3. 生成 AST</h3><p>我们通过下面的🌰来认识一下AST</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const add = <span class="function"><span class="params">(a, b)</span> =&gt;</span> a + b</span><br></pre></td></tr></table></figure>
+<p>我们可以使用<a href="https://esprima.org/" target="_blank" rel="noopener">Esprima</a>这个网站来在线生成AST</p>
+<p>解析后的JSON格式如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"Program"</span>,</span><br><span class="line">  <span class="attr">"body"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"VariableDeclaration"</span>,</span><br><span class="line">      <span class="attr">"declarations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"VariableDeclarator"</span>,</span><br><span class="line">          <span class="attr">"id"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"add"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"init"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"ArrowFunctionExpression"</span>,</span><br><span class="line">            <span class="attr">"id"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"params"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"b"</span></span><br><span class="line">              &#125;</span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"body"</span>: &#123;</span><br><span class="line">              <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">              <span class="attr">"operator"</span>: <span class="string">"+"</span>,</span><br><span class="line">              <span class="attr">"left"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="attr">"right"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"b"</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"generator"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"expression"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"async"</span>: <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"kind"</span>: <span class="string">"const"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"sourceType"</span>: <span class="string">"script"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>他的语法树长这个样子：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi24wdluwnj30bo0oxta2.jpg" alt></p>
+<p>可以用这张图更直观的看：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi23rcrrooj30yg0s2kjl.jpg" alt></p>
+<p>现在我们通过上面的语法树和图片来解析这段代码：</p>
+<p>AST 的 根节点是 Program（每一个AST 的 根节点都是Program）</p>
+<p>一个VariableDeclaration (变量声明）： 一个 name 为 add 的 ArrowFunctionExpression（箭头函数）</p>
+<ul>
+<li>箭头函数 add 接受 两个参数 <code>a</code> 和 <code>b</code>，</li>
+<li>函数主体是一个BinaryExpression（二项式)<ul>
+<li>left: a,</li>
+<li>operator(操作符): +，</li>
+<li>right: b</li>
+</ul>
+</li>
+</ul>
+<p>再看一个例子：<code>(1+2)*3</code></p>
+<p>他的AST：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"Program"</span>,</span><br><span class="line">  <span class="attr">"body"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"ExpressionStatement"</span>,</span><br><span class="line">      <span class="attr">"expression"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">        <span class="attr">"operator"</span>: <span class="string">"*"</span>,</span><br><span class="line">        <span class="attr">"left"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">          <span class="attr">"operator"</span>: <span class="string">"+"</span>,</span><br><span class="line">          <span class="attr">"left"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">"raw"</span>: <span class="string">"1"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"right"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">"raw"</span>: <span class="string">"2"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"right"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">          <span class="attr">"value"</span>: <span class="number">3</span>,</span><br><span class="line">          <span class="attr">"raw"</span>: <span class="string">"3"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"sourceType"</span>: <span class="string">"script"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在把上面例子中的（） 去掉， <code>1+2*3</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"Program"</span>,</span><br><span class="line">  <span class="attr">"body"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"ExpressionStatement"</span>,</span><br><span class="line">      <span class="attr">"expression"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">        <span class="attr">"operator"</span>: <span class="string">"+"</span>,</span><br><span class="line">        <span class="attr">"left"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">          <span class="attr">"value"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"raw"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"right"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">          <span class="attr">"operator"</span>: <span class="string">"*"</span>,</span><br><span class="line">          <span class="attr">"left"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">"raw"</span>: <span class="string">"2"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"right"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">"raw"</span>: <span class="string">"3"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"sourceType"</span>: <span class="string">"script"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面这几个例子， 可以大概看出，  一些标签是固定的， 比如 <code>BinaryExpression(二项式)</code>， <code>ArrowFunctionExpression(箭头函数)</code>， <code>VariableDeclaration(变量声明)</code>等， 所以 语法抽象树其实就是将一类标签转化成通用标识符， 从而得到一个类似树形结构的语法树。</p>
+<p>到这一步， 我们已经可以把js结构转换成一个结构树了，接下来能干什么呢？ 我们在没有结构树的时候，要想执行某一个操作，比如删除所有console， 就需要查找所有console并且删除代码， 可是如果我们有了抽象结构树， 我们对结构树进行一些修整， 再把调整后的结构树转换成js代码是不是就可以了呀</p>
+<p>顺着这个思路， 我们是不是就可以做很多事情啦， 比如 <code>Bable</code></p>
+<h3 id="4-关于babel"><a href="#4-关于babel" class="headerlink" title="4. 关于babel"></a>4. 关于babel</h3><p>babel 的功能其实很纯粹， 他只是一个编译器， 把<code>ECMAScript 2015 +</code>的代码转译成es 5 的代码， 使得代码可以在不同的浏览器或者不同的环境运行， 他不会运行我们的代码， 也不会对代码进行打包， 只是进行一个转译。</p>
+<p>编译器的工作过程可以分为三部分：</p>
+<ol>
+<li>「Parse(解析)」：将源代码转换成更加抽象的表示方法（例如抽象语法树）</li>
+<li>「Transform(转换)」：对（抽象语法树）做一些特殊处理，让它符合编译器的期望</li>
+<li>「Generate(代码生成)」：将第二步经过转换过的（抽象语法树）生成新的代码</li>
+</ol>
+<p>如图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/9575907-350bc03649423cd4.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt></p>
+<p>用一段简单的代码 模拟一下babel转译箭头函数的过程：</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> esprima = <span class="keyword">require</span>(<span class="string">'esprima'</span>);  <span class="comment">// 解析js代码生成AST</span></span><br><span class="line"><span class="keyword">const</span> estraverse = <span class="keyword">require</span>(<span class="string">'estraverse'</span>); <span class="comment">// estraverse 遍历并更新AST</span></span><br><span class="line"><span class="keyword">const</span> escodegen = <span class="keyword">require</span>(<span class="string">'escodegen'</span>); <span class="comment">// 将AST重新生成源码</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> code = `<span class="keyword">let</span> sum = (a, b)=&gt;&#123;<span class="keyword">return</span> a+b&#125;`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ast = esprima.parse(code); <span class="comment">// 解析js代码生成AST</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArrowFunctionExpression</span><span class="params">(path)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; node &#125; = path;</span><br><span class="line">  <span class="keyword">let</span> body = node.body;</span><br><span class="line">  <span class="keyword">let</span> params = node.params;</span><br><span class="line">  <span class="keyword">let</span> r = t.functionExpression(<span class="keyword">null</span>, params, body, <span class="keyword">false</span>, <span class="keyword">false</span>);</span><br><span class="line">  path.replaceWith(r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">estraverse.traverse(ast, &#123;</span><br><span class="line">  enter(node) &#123;</span><br><span class="line">    ArrowFunctionExpression(node);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);  <span class="comment">// estraverse 遍历并更新AST</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = escodegen.generate(ast)  <span class="comment">// 将AST重新生成源码</span></span><br><span class="line">console.log(result);</span><br></pre></td></tr></table></figure>
+<p>这只是一个大致的过程， 中间的很多细节比如ast 怎么生成的， 又是怎么转换成js代码的， 还需要去详细的研究源码， 就不介绍了， 毕竟我也不清楚， 哈哈哈哈~  有感兴趣的同学可以自行深入研究哦</p>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://mp.weixin.qq.com/s/0vrLXF2aS5-Oa9iWF8VW5A" target="_blank" rel="noopener">看了就懂的 AST 和 Babel 工作流程</a><br><a href="http://jartto.wang/2018/11/17/about-ast/" target="_blank" rel="noopener">AST 抽象语法树</a><br><a href="https://www.jianshu.com/p/eff95b93bb8a" target="_blank" rel="noopener">30分钟学会JS AST，打造自己的编译器</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
