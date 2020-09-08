@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">css-in-js</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">css-in-js</h1>
+        <div class="stuff">
+            <span>九月 03, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css/">css</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css-in-js/">css in js</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>我们从一个例子开始今天的文章</p>
+<p>假设我们现在有一个需求， 要求实现一个 button， 具有悬停状态并且在悬停时略微升高</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#3ecf8e</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: white;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">border</span>: none;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">175ms</span> ease-in-out;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">8px</span> <span class="number">14px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.35</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.08</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.button</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-class">.button</span><span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">18px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.08</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在某一天， 产品经理要求在这个button的基础上加一个辅助样式， 但还是使用原样式作为主要样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.secondary</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#7795f8</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后的某一天， 产品经理又说 我需要一个比这个小一点的按钮<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span><span class="selector-class">.tiny</span> &#123;</span><br><span class="line">     <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">     <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在之后的又一天， 产品经理又说  第二种情况的button 我需要一个hover效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span><span class="selector-class">.secondary</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#7795f8</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>嗯，其实每次要加的都是一个很简单的小功能， 但是， 时间长了，无数的小功能的堆叠， 我们的css代码就会变得不再那么干净了</p>
+<p>然后 又是那么一个风和日丽的一天， 我们需要实现一个长得很像button的链接</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a <span class="keyword">class</span>="<span class="symbol">button</span> <span class="symbol">secondary</span>"&gt; 我只是一个链接 &lt;/<span class="symbol">a</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>然后再写完之后， 发现咦，我的样式怎么不对呢， 找了半天，发现， 哦  原来 <code>button</code>, <code>secondary</code>这两个类名原来已经用过了， 那咋办呢， 好办， 用 <code>!important</code> 不就好了吗</p>
+<p>长此以往下去，我们以后需要加一个小小的功能， 可能就会变得特别复杂</p>
+<p>从上面的例子中， 我们可以看出传统css有一个最大的痛点， 就是全局作用域的问题</p>
+<p>在多人协作的过程中， 其实就算是只有一个人开发， 也难免会遇到css 类名重复的问题。 为了解决这个问题， 出现了<code>BEM</code>, <code>OOCSS</code>等命名方式</p>
+<p>以下是遵循<code>BEM</code>命名规范的写法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.form</span> &#123; &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.form--theme-blue</span> &#123; &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.form__input</span> &#123; &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.form__submit</span> &#123; &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.form__submit__disabled</span> &#123; &#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"form form--theme-blue"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form__input"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form__submit form__submit__disabled"</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个写法的话， 用在公共组件库的话， 也就算了， 毕竟公共组件库， 还是越详细越通俗易懂越好一些， 可是如果用在业务组件中， 就有些繁琐了。 况且在多人团队开发中， 规则的制定，维护，与使用，耗费的成本还是比较大的</p>
+<p>还有一个问题，css中删除样式是一件令人毛骨悚然的操作， 因为我们不知道删掉这段代码之后， 会造成什么样的影响， 需要经过许多的回归测试，才能保证不会有问题。 所以， 重构css就变得异常的困难</p>
+<p>现在 还有一种应用比较广泛的方式， 就是 CSS Module。 我们可以通过webpack的css-loader在打包的时候指定打包后的类名格式，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">webpack</span> <span class="string">config</span></span><br><span class="line"><span class="string">module.exports</span> <span class="string">=</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">module:</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">loaders:</span> <span class="string">[</span></span><br><span class="line">            <span class="string">&#123;</span></span><br><span class="line">                <span class="attr">test:</span> <span class="string">/\.css$/,</span></span><br><span class="line">                <span class="attr">use:</span> <span class="string">[</span></span><br><span class="line">                    <span class="string">'style-loader'</span><span class="string">,</span></span><br><span class="line">                    <span class="string">&#123;</span></span><br><span class="line">                        <span class="attr">loader:</span> <span class="string">'css-loader'</span><span class="string">,</span></span><br><span class="line">                        <span class="attr">options:</span> <span class="string">&#123;</span></span><br><span class="line">                            <span class="attr">modules:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">                            <span class="attr">localIdentName:</span> <span class="string">'[name]__[local]--[hash:base64:5]'</span><span class="string">,</span></span><br><span class="line">                        <span class="string">&#125;</span></span><br><span class="line">                    <span class="string">&#125;</span></span><br><span class="line">                <span class="string">]</span></span><br><span class="line">            <span class="string">&#125;,</span></span><br><span class="line">        <span class="string">]</span></span><br><span class="line">    <span class="string">&#125;,</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样最终class类名就会被编译成<code>app__form__hash</code>这样的格式了， 就能保证不会出现重复类名的问题了</p>
+<p>但是吧 在用这种方式的时候， 有一个小小的吐槽的点， 因为编译之后的类名是带hash的， 如果需要在使用的时候对类名进行重写的时候， 不是很能很准确的找到想重写的元素。</p>
+<h3 id="css-in-js"><a href="#css-in-js" class="headerlink" title="css in js"></a>css in js</h3><p>顾名思义， css in js 就是在js中直接编写css， 也是react官方推荐的css 编写方案， <a href="https://github.com/MicheleBertoli/css-in-js" target="_blank" rel="noopener">据统计</a>， 现在css in js相关的package 已经 60多个了</p>
+<p>对几个比较典型的进行一下比较</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">name</th>
+<th style="text-align:center">star</th>
+<th style="text-align:center">ezis pizg</th>
+<th style="text-align:center">download</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">styled-components</td>
+<td style="text-align:center">17,306</td>
+<td style="text-align:center">12.5KB</td>
+<td style="text-align:center">1,085,338</td>
+</tr>
+<tr>
+<td style="text-align:center">emotion</td>
+<td style="text-align:center">4101</td>
+<td style="text-align:center">5.92KB</td>
+<td style="text-align:center">260,249</td>
+</tr>
+<tr>
+<td style="text-align:center">jss</td>
+<td style="text-align:center">5900</td>
+<td style="text-align:center">6.73KB</td>
+<td style="text-align:center">431,995</td>
+</tr>
+<tr>
+<td style="text-align:center">radium</td>
+<td style="text-align:center">6372</td>
+<td style="text-align:center">23.3k</td>
+<td style="text-align:center">857,067</td>
+</tr>
+<tr>
+<td style="text-align:center">aphrodite</td>
+<td style="text-align:center">4175</td>
+<td style="text-align:center">7.23KB</td>
+<td style="text-align:center">358,386</td>
+</tr>
+</tbody>
+</table>
+<p>从上面的表格可以看出， <code>emotion</code>是体积最小的，  <code>styled-components</code>是star最多的， 下载量也是最多的， 生态环境比较完整，文档也是比较完善的<br>看官方介绍的话， <code>emotion</code>, <code>aphrodite</code>, <code>jss</code>支持的特性会比较多一些</p>
+<p>所以 可以先从<code>styled-components</code>试着上手接触， 但是综合来看，<code>emotion</code> 是个比较不错的选择</p>
+<p>虽然相关的库有很多， 但是实现方法大致分为两种， 唯一css选择器 和 内联样式。 我们可以在<a href="https://www.cssinjsplayground.com/" target="_blank" rel="noopener">CSS-in-JS Playground</a>快速尝试不同CSS-in-JS实现</p>
+<h4 id="Styled-components"><a href="#Styled-components" class="headerlink" title="Styled-components"></a>Styled-components</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihwvjv5a7j31l60u0at0.jpg" alt></p>
+<p>打开控制台， 看一下他的css</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihwyu7abuj311a0u0wxj.jpg" alt></p>
+<p><code>Styled-components</code> 是通过模板定义好一个styled过的组件， 我们直接使用styled之后的组件就可以了。  他会给这个组件生成一个随机的哈希字符串的类名，实现了局部css作用域的效果， 各个组件的类名不会重复， 不会发生冲突</p>
+<h4 id="emotion"><a href="#emotion" class="headerlink" title="emotion"></a>emotion</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihx34f335j31270u0ned.jpg" alt></p>
+<p>打开控制台， 看一下他的css</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihx3twyo7j31090u0k9y.jpg" alt></p>
+<p><code>emotion</code> 跟 <code>Styled-components</code>相似， 都是通过<code>styled</code>生成一个新组件， 并且样式都是通过随机class名称实现局部css作用域的方式实现的</p>
+<h4 id="radium"><a href="#radium" class="headerlink" title="radium"></a>radium</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihx7l9806j31810u0h1n.jpg" alt></p>
+<p>生成的css</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihx8uwfdlj315b0u0dxe.jpg" alt></p>
+<p>从上面的例子可以出， 他和 <code>Styled-components</code> 和 <code>emotion</code> 的语法有很大区别， 他是以内联样式的方式插入css的。<br>由于标签内联样式在处理诸如media query以及:hover，:focus，:active等和浏览器状态相关的样式的时候非常不方便，所以radium为这些样式封装了一些标准的接口以及抽象， 如下图</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gihx89tfiwj30qy11cjzf.jpg" alt></p>
+<h3 id="css-in-js-的-好处"><a href="#css-in-js-的-好处" class="headerlink" title="css in js 的 好处"></a>css in js 的 好处</h3><h4 id="1-局部作用域"><a href="#1-局部作用域" class="headerlink" title="1. 局部作用域"></a>1. 局部作用域</h4><p>css 最被人诟病的问题就是 全局作用域， 所有的样式一旦声明全局适用。 所以页面上任何元素只要匹配这个规则， 就会生效， 况且规则之前是可以叠加的， 开发过程中产生冲突的概率就会大大增加</p>
+<p>css in js 自动提供局部作用域的功能， 组件的样式被限制只能在当前组件使用， 不会对其他组件产生影响</p>
+<h4 id="2-避免无用样式堆积"><a href="#2-避免无用样式堆积" class="headerlink" title="2. 避免无用样式堆积"></a>2. 避免无用样式堆积</h4><p>因为在我们的开发项目中， 一般样式与css并不具有很明确的对应关系， 所以删除css 是一件很痛苦的问题。</p>
+<p>但css in js 一个特色就是会把css与组件绑定在一起， 当删除组件时， 直接删除文件会把js和css一起删除， 不用担心删除css会对其他组件产生影响</p>
+<h4 id="3-基于状态的样式定义"><a href="#3-基于状态的样式定义" class="headerlink" title="3. 基于状态的样式定义"></a>3. 基于状态的样式定义</h4><p>在我们日常的开发过程中， 可能需要根据页面中的状态展示不同的颜色， 为了实现这个需求， 需要针对不同的状态设置不同的类名， 然后给不同的类名设置不同的样式，  在交互特别复杂的时候， 就会变得异常的困难</p>
+<p>但是在css in js中， 我们可以获取到当前页面中的状态值， css直接根据状态进行设置即可</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import styled <span class="keyword">from</span> <span class="string">'styled-components'</span></span><br><span class="line"></span><br><span class="line">const circleColorLookup = &#123;</span><br><span class="line">  healthy: <span class="string">'green'</span>,</span><br><span class="line">  stop: <span class="string">'red'</span>,</span><br><span class="line">  ready: <span class="string">'yellow'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>styled.div`</span><br><span class="line">  <span class="built_in">..</span>. circle base styles</span><br><span class="line">  background-color: <span class="variable">$&#123;(&#123; status &#125;</span>) =&gt; circleColorLookup[status]&#125;;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<h4 id="4-样式按需挂载"><a href="#4-样式按需挂载" class="headerlink" title="4. 样式按需挂载"></a>4. 样式按需挂载</h4><p>页面需要的样式才会加载，有效避免样式冗余 （未深入研究）</p>
+<h3 id="css-in-js-的-缺点"><a href="#css-in-js-的-缺点" class="headerlink" title="css in js 的 缺点"></a>css in js 的 缺点</h3><h4 id="1-学习成本"><a href="#1-学习成本" class="headerlink" title="1. 学习成本"></a>1. 学习成本</h4><p>使用css in js 需要学习某个css in js的库的实现， 需要时间适应新的开发习惯，学习成本较高，引入初期可能会降低开发效率</p>
+<h4 id="2-依赖库的实现"><a href="#2-依赖库的实现" class="headerlink" title="2.  依赖库的实现"></a>2.  依赖库的实现</h4><p>某些特性的实现， 只能依赖库的实现， 不能完全复用原生环境</p>
+<h4 id="3-代码可读性差"><a href="#3-代码可读性差" class="headerlink" title="3. 代码可读性差"></a>3. 代码可读性差</h4><p>大部分css in js 库会生成唯一的css 类名， 自动生成的类选择器会使代码的可读性变差， 增加debug的难度</p>
+<h4 id="4-没有统一标准"><a href="#4-没有统一标准" class="headerlink" title="4. 没有统一标准"></a>4. 没有统一标准</h4><p>目前css in js 并没有社区统一遵循的规则和标准， 不同的库的用法可能差异较大， 迁移时难度较大</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>css in js  有好处也有坏处， 我们根据自己的实际情况判断是否需要引入就好了~</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://www.ruanyifeng.com/blog/2017/04/css_in_js.html" target="_blank" rel="noopener">CSS in JS 简介</a><br><a href="https://juejin.im/post/6844904051369328648" target="_blank" rel="noopener">CSS in JS的好与坏</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
