@@ -4,7 +4,7 @@ date: 2020-09-03 11:05:04
 tags:
   - css
   - css in js
-cover: https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794__480.jpg
+cover: https://cdn.pixabay.com/photo/2020/09/07/16/32/fishing-5552310__480.jpg
 ---
 
 我们从一个例子开始今天的文章

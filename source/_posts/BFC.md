@@ -4,7 +4,7 @@ date: 2020-07-27 15:37:59
 tags:
     - css
     - BFC
-cover: https://cdn.pixabay.com/photo/2020/07/22/12/08/cats-eyes-5428855__480.jpg
+cover: https://cdn.pixabay.com/photo/2020/09/03/15/37/waterscape-5541692__480.jpg
 ---
 
 BFC是css中一个比较经常被问到的概念， 这次，我们来彻底搞懂他
