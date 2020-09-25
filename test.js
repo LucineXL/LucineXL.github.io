@@ -233,3 +233,13 @@ Promise.resolve()
       }
     }
   }
+
+  function unique(arr) {
+    const res = [];
+    arr.forEach((item, index) => {
+      if (arr.indexof(item) === index) {
+        res.push(item);
+      }
+    })
+    return res;
+  }
