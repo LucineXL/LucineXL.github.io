@@ -126,7 +126,66 @@
 <h4 id="Repository-仓库"><a href="#Repository-仓库" class="headerlink" title="Repository 仓库"></a>Repository 仓库</h4><p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。</p>
 <p>一个 Docker Registry 中可以包含多个 仓库（Repository）；每个仓库可以包含多个 标签（Tag）；每个标签对应一个镜像。</p>
 <p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。</p>
-<h3 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h3><p>参考文献：</p>
+<h3 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h3><p>可以使用<code>homebrew</code>进行安装<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>docker</span><br></pre></td></tr></table></figure></p>
+<p>安装成功后， 可以使用 <code>docker --version</code> 检查安装后的版本</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvnre6aenj30gk03umxd.jpg" alt></p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h4><ol>
+<li>搜索镜像, 以node 镜像为例</li>
+</ol>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search <span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvnv1c8o8j31mq0kkte4.jpg" alt></p>
+<p>上面字段分别为： 镜像名称， 描述， star数量，是否为官方镜像， 是否为自动生成</p>
+<ol start="2">
+<li>下载镜像</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">pull</span> 镜像名<span class="selector-attr">[:版本]</span></span><br></pre></td></tr></table></figure>
+<p>不输入版本号时 默认为 latest</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvnydmm4pj30wo0e8tb0.jpg" alt></p>
+<ol start="3">
+<li>查看本地镜像</li>
+</ol>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">image</span> <span class="keyword">ls</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvnyq9snzj31hg05m3zp.jpg" alt></p>
+<ol start="4">
+<li>删除镜像</li>
+</ol>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker image rm 镜像名/镜像<span class="built_in">id</span></span><br><span class="line">docker rmi 镜像名/镜像<span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvnzmvrbcj30ze0cctbv.jpg" alt></p>
+<h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><ol>
+<li>创建容器</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> [选项] 镜像</span></span><br></pre></td></tr></table></figure>
+<p>如果本地不存在该镜像时， 会先到镜像仓库下载该镜像</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvontx2v9j31py0ms7af.jpg" alt></p>
+<p>上面的例子中， 本地没有nginx镜像， 先拉取nginx镜像，  -p 参数将容器中的 80 端口映射到宿主机中的 8080 端口</p>
+<p>此时访问本地的 <code>http://localhost:8080/</code>, 即可看见nginx欢迎页</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvop5ahe9j30zu0g2aby.jpg" alt></p>
+<ol start="2">
+<li>查看运行中的容器</li>
+</ol>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker <span class="keyword">container</span> <span class="keyword">ls</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvoqh7g5yj31n802ut98.jpg" alt></p>
+<p>图中显示的即为我们刚刚启动的nginx容器</p>
+<p>我们使用ctrl + c 关闭容器后， 再次查询运行中的容器</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvorv9absj31fm01qwen.jpg" alt></p>
+<p>此时并没有正在运行中的容器</p>
+<p>加上 -a 参数后 可以查看处于停止状态的容器</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjvoss43yvj31qq0423zm.jpg" alt></p>
+<ol start="3">
+<li>停止容器</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container <span class="keyword">stop</span> 容器<span class="keyword">id</span>/容器名</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>启动容器</li>
+</ol>
+<p>容器停止后，可以重新启动，不需要重新创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container <span class="keyword">start</span> 容器<span class="keyword">id</span></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>删除容器</li>
+</ol>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">container</span> rm 容器id <span class="comment">// 删除一个容器</span></span><br><span class="line">docker <span class="keyword">container</span> rm id1 id2 <span class="comment">// 使用空格隔开，可删除多个容器</span></span><br><span class="line">docker <span class="keyword">container</span> prune  <span class="comment">// 删除所有处于停止状态的容器</span></span><br></pre></td></tr></table></figure>
+<h4 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h4><p>docker 的 仓库包括 共有仓库 和 私有仓库，  共有仓库可以通过  <code>docker hub</code> 访问</p>
+<p><br><br><br><br>参考文献：</p>
 <p><a href="https://yeasy.gitbook.io/docker_practice/" target="_blank" rel="noopener">Docker – 从入门到实践</a></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
