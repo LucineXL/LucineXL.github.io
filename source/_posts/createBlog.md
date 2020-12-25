@@ -4,7 +4,7 @@ title: 使用hexo搭建个人博客
 date: 2017-08-05 15:00:31
 conmments: true
 tags: hexo
-cover: http://hd.wallpaperswide.com/thumbs/virtual_reality_travel-t2.jpg
+cover: https://images.pexels.com/photos/6101986/pexels-photo-6101986.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
 ---
 
 本文介绍了使用hexo搭建个人博客的详细过程~
