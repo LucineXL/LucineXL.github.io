@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">二级导航进化史</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">二级导航进化史</h1>
+        <div class="stuff">
+            <span>十二月 25, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>最近在做导航的重构， 关于导航的动画几经波折， 终于圆满结束， 梳理一下进化过程</p>
+<h5 id="导航dom结构及最终效果"><a href="#导航dom结构及最终效果" class="headerlink" title="导航dom结构及最终效果"></a>导航dom结构及最终效果</h5><p>左侧一级导航列表 <code>ul</code>, 每一个一级导航模块为<code>li</code>, 右侧二级导航部分为<code>div</code>, 右侧二级导航部分始终固定在一级导航右侧， 高度撑满全屏， hover一级导航时展示对应二级导航</p>
+<p>样式如下图</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm05zdbxflj30gs0hkdia.jpg" width="300px"><br></image></div>
+
+<p>最终效果如图</p>
+<div align="center"><br><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm04k6gf2fg30a006ogu9.gif" alt><br></div>
+
+
+<p>其实跟<a href="https://www.taobao.com/" target="_blank" rel="noopener">淘宝首页</a>类别选择模块的效果很相似</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm0525nblej318q0u07ms.jpg" width="400px"><br></image></div>
+
+
+<h3 id="v1-0"><a href="#v1-0" class="headerlink" title="v1.0"></a>v1.0</h3><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xquery">&#123;menu.<span class="keyword">map</span>(<span class="type">item</span> =&gt; &#123;</span></span><br><span class="line"><span class="xquery">    <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="xquery">        &lt;a href=&#123;<span class="type">item</span>.url&#125;</span><span class="xml">&gt;</span><span class="xquery">&#123;<span class="type">item</span><span class="built_in">.name</span>&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            // 展示一级导航相关的二级导航</span></span><br><span class="line"><span class="xml">            </span><span class="xquery">&#123;...<span class="type">item</span>.detail&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">&#125;)&#125;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p>最初版本实现方式， 将二级导航（以下称为detail部分）放在<code>li</code>内部， <code>li</code>hover时, 将该<code>li</code>中的detail<code>display</code>设为可见</p>
+<p>导航右侧detail部分在显示和隐藏的时候需要有一个缓慢收起和打开的动画效果， 鼠标在左侧导航列表hover过程中， 右侧detail部分只应该内容切换， div大小不能发生改变。</p>
+<p>使用这个实现方式， 在每一个<code>li</code>元素下都有一个detail元素， 所以是没有办法做到hover切换的时候， 右侧detail大小不变， 只切换展示内容的</p>
+<p>于是乎， 这个版本 pass</p>
+<h3 id="v2-0"><a href="#v2-0" class="headerlink" title="v2.0"></a>v2.0</h3><p>为了解决1.0的detail宽度不变的问题， 就只能所有二级导航共用一个detail元素， 只能通过变量记录需要当前hover的一级导航， 根据变量在detail渲染相关内容</p>
+<p>dom结构如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainNav</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            currentNav: <span class="literal">null</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 鼠标移入事件</span></span><br><span class="line">    setCurrent = <span class="function">(<span class="params">nav = <span class="literal">null</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">        currentNav: nav,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 鼠标移出事件</span></span><br><span class="line">    handleMouseLeave = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.state.currentNav) &#123;</span><br><span class="line">        <span class="keyword">this</span>.setCurrent();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> () &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li</span><br><span class="line">                        onMouseEnter=&#123;() =&gt; <span class="keyword">this</span>.setCurrent(currentNavObj)&#125;</span><br><span class="line">                        onMouseLeave=&#123;<span class="keyword">this</span>.handleMouseLeave&#125;</span><br><span class="line">                    &gt;一级导航&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/u</span>l&gt;</span><br><span class="line">                &lt;div</span><br><span class="line">                    onMouseEnter=&#123;() =&gt; <span class="keyword">this</span>.setCurrent(currentNavObj)&#125;</span><br><span class="line">                    onMouseLeave=&#123;<span class="keyword">this</span>.handleMouseLeave&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                    &#123;...details&#125;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过监听鼠标的移入移出事件， 鼠标移入 设置变量， 鼠标移出 清空变量</p>
+<p>左侧列表和右侧detail是连在一起的，左侧li移出的同时，右侧鼠标移入， 1.0 的问题完美解决</p>
+<p>截止到现在， 已经基本完成需求， 但还是有一些问题</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/0081Kckwly1gm06yh6f6bj316c0qwq6x.jpg" width="500px"><br></image></div>
+
+<p>如上图, 当hover在位置靠下的一级导航块B的时候， 鼠标右滑点击二级导航时， 本着两点之间直线最短的原则，正常操作会直接斜向上滑动到二级导航（图中红色箭头的路线）， 当鼠标滑动到一级导航块A范围内的时候， 变量会被设置为A， 于是， 此时二级导航部分展示的其实是导航A的内容，  要想显示B的二级导航内容， 就只能鼠标先向右滑动， 再向上滑动， 这样的交互对用户不是特别友好</p>
+<p>于是， 便有了接下来的 3.0 版本</p>
+<h3 id="v3-0"><a href="#v3-0" class="headerlink" title="v3.0"></a>v3.0</h3><p>前端面试中经常出现的一个面试题是<code>防抖</code>和<code>节流</code>, 我们先来复习一下</p>
+<h4 id="1-防抖"><a href="#1-防抖" class="headerlink" title="1. 防抖"></a>1. 防抖</h4><p>如果短时间内大量触发同一事件，只会在最后一次执行这个函数。</p>
+<p>实现方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,delay</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer)&#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">        &#125;</span><br><span class="line">        timer = setTimeout(fn,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-节流"><a href="#2-节流" class="headerlink" title="2. 节流"></a>2. 节流</h4><p>如果短时间内大量触发同一事件，那么在函数执行一次之后，该函数在指定的时间期限内不再工作，直至过了这段时间才重新生效。</p>
+<p>实现方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn,delay</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> valid = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(!valid)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">       &#125;</span><br><span class="line">        valid = <span class="literal">false</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn()</span><br><span class="line">            valid = <span class="literal">true</span>;</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以优化一下鼠标移入和移出函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.enterTimer = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">this</span>.leaveTimer = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 鼠标移入事件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mouseEnter = <span class="function">(<span class="params">nav = <span class="literal">null</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 清空鼠标移出的计时器</span></span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.leaveTimer);</span><br><span class="line">  <span class="comment">// 使用防抖， 100ms内只执行最后一次</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.enterTimer) &#123;</span><br><span class="line">    clearTimeout(<span class="keyword">this</span>.enterTimer);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.enterTimer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      currentNav: nav,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, <span class="number">100</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 鼠标移除时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mouseLeave = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 若鼠标移出50s后， 清空移入计时器， 清空变量</span></span><br><span class="line">  <span class="keyword">this</span>.leaveTimer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    clearTimeout(<span class="keyword">this</span>.enterTimer);</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      currentNav: <span class="literal">null</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, <span class="number">50</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>至此， 导航动画圆满结束</p>
+<p>梳理一下  其实也没啥难点， 就是用了个防抖</p>
+<hr>
+<p>刚刚被告知这个需求有可能要重构   🤣🤣🤣🤣🤣🤣</p>
+<p>就用这篇文章证明一下  这几天没有折腾个寂寞吧</p>
+<p>tips: 我终于分清哪个是防抖， 哪个是节流了 ~</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
