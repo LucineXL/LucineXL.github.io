@@ -2,6 +2,8 @@
 title: 初始docker
 date: 2020-10-19 10:40:37
 tags:
+    - docker
+cover: https://images.pexels.com/photos/5480759/pexels-photo-5480759.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
 ---
 
 
