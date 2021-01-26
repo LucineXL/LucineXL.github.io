@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">玩转 css border</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">玩转 css border</h1>
+        <div class="stuff">
+            <span>一月 21, 2021</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css/">css</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>前几天看了一篇文章， 发现原来css还能玩出这么多的花样，于是乎，便跟着文章试验了一下，对css的 <code>linear-gradient</code> 和 <code>conic-gradient</code>几个不常用的属性也有了更深刻的理解 （原链接 <a href="https://juejin.cn/post/6918921604160290830" target="_blank" rel="noopener">CSS 奇思妙想边框动画</a>）</p>
+<p>在开始之前， 先来复习一下css的几个属性（详细介绍篇幅过长， 就直接偷懒抛MDN链接了）</p>
+<ol>
+<li><p>border  <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border" target="_blank" rel="noopener">MDN border 详情</a></p>
+</li>
+<li><p>background   <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background" target="_blank" rel="noopener">MDN background 详情</a></p>
+</li>
+<li><p>animation   <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation" target="_blank" rel="noopener">MDN animation 详情</a></p>
+</li>
+<li><p>linear-gradient  <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/linear-gradient()" target="_blank" rel="noopener">MDN linear-gradient 详情</a></p>
+</li>
+<li><p>conic-gradient <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/conic-gradient()" target="_blank" rel="noopener">MDN conic-gradient 详情</a></p>
+</li>
+</ol>
+<p>现在， 我们就来实现一些不一样的边框效果吧</p>
+<h4 id="1-hover边框长度变化"><a href="#1-hover边框长度变化" class="headerlink" title="1. hover边框长度变化"></a>1. hover边框长度变化</h4><p>实现效果：</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gmvf9yejljg30cg0b0myb.gif" width="300px"><br></image></div>
+
+<p>实现思路： 利用两个伪元素，分别只设置上、左边框 和 下、右边框， 鼠标hover改变伪元素长度。</p>
+<p>dom:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;styles.con1&#125;/</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>css:<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.con1</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#03A9F3</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span>, &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">transition</span>: all <span class="number">0.2s</span>;</span><br><span class="line">        <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#03A9F3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">5px</span>;</span><br><span class="line">        <span class="attribute">left</span>: -<span class="number">5px</span>;</span><br><span class="line">        <span class="attribute">border-right</span>: none;</span><br><span class="line">        <span class="attribute">border-bottom</span>: none</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;::after &#123;</span><br><span class="line">        bottom: -<span class="number">5px</span>;</span><br><span class="line">        <span class="attribute">right</span>: -<span class="number">5px</span>;</span><br><span class="line">        <span class="attribute">border-left</span>: none;</span><br><span class="line">        <span class="attribute">border-top</span>: none;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">        &amp;<span class="selector-pseudo">::before</span>, &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: calc(<span class="number">100%</span> + <span class="number">10px</span>);</span><br><span class="line">            <span class="attribute">height</span>: calc(<span class="number">100%</span> + <span class="number">10px</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-虚线边框动画"><a href="#2-虚线边框动画" class="headerlink" title="2. 虚线边框动画"></a>2. 虚线边框动画</h4><p>实现效果：</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gmwjeaykxqg30a80ggq5s.gif" width="300px"><br></image></div>
+
+<p>实现思路：</p>
+<p>border 是可以实现虚线效果的， 但是不能做到动起来的效果， 所以可以换成用渐变的方式实现虚线</p>
+<p>先来实现一条横着的虚线,  虚线其实就是 ‘- ‘   的循环， 所以我们只需要实现一个’- ‘, 然后利用background-repeat进行循环即可</p>
+<p>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, #<span class="number">333</span> <span class="number">50%</span>, transparent <span class="number">0</span>) repeat-x;</span><br><span class="line">    <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">4px</span> <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br>150 * 100 的div， 拥有了一条虚线的上边框</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gmwl6uno2ej30ho0aemxg.jpg" width="300px"><br></image></div>
+
+<p>有了第一条， 同理， 就可以有第二，三，四条, 然后，利用animation, 让我们的虚线动起来， 上图中的第一个效果圆满完成</p>
+<p>css：<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@keyframes linearGradientMove &#123;</span><br><span class="line">    <span class="number">100</span>% &#123;</span><br><span class="line">        background-position: <span class="number">4</span>px <span class="number">0</span>, <span class="number">-4</span>px <span class="number">100</span>%, <span class="number">0</span> <span class="number">-4</span>px, <span class="number">100</span>% <span class="number">4</span>px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.con2 &#123;</span><br><span class="line">    width: <span class="number">150</span>px;</span><br><span class="line">    height: <span class="number">100</span>px;</span><br><span class="line">    background:</span><br><span class="line">        linear-gradient(<span class="number">90</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-x,</span><br><span class="line">        linear-gradient(<span class="number">90</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-x,</span><br><span class="line">        linear-gradient(<span class="number">0</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-y,</span><br><span class="line">        linear-gradient(<span class="number">0</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-y;</span><br><span class="line">    background-size: <span class="number">4</span>px <span class="number">1</span>px, <span class="number">4</span>px <span class="number">1</span>px, <span class="number">1</span>px <span class="number">4</span>px, <span class="number">1</span>px <span class="number">4</span>px;</span><br><span class="line">    background-position: <span class="number">0</span> <span class="number">0</span>, <span class="number">0</span> <span class="number">100</span>%, <span class="number">0</span> <span class="number">0</span>%, <span class="number">100</span>% <span class="number">0</span>;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        animation: linearGradientMove <span class="number">.3</span>s linear infinite;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上图效果2：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.con3 &#123;</span><br><span class="line">    width: <span class="number">150</span>px;</span><br><span class="line">    height: <span class="number">100</span>px;</span><br><span class="line">    border: <span class="number">1</span>px solid #<span class="number">333</span>;</span><br><span class="line"></span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        border: none;</span><br><span class="line">        background:</span><br><span class="line">        linear-gradient(<span class="number">90</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-x,</span><br><span class="line">        linear-gradient(<span class="number">90</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-x,</span><br><span class="line">        linear-gradient(<span class="number">0</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-y,</span><br><span class="line">        linear-gradient(<span class="number">0</span>deg, #<span class="number">333</span> <span class="number">50</span>%, transparent <span class="number">0</span>) repeat-y;</span><br><span class="line">    background-size: <span class="number">4</span>px <span class="number">1</span>px, <span class="number">4</span>px <span class="number">1</span>px, <span class="number">1</span>px <span class="number">4</span>px, <span class="number">1</span>px <span class="number">4</span>px;</span><br><span class="line">    background-position: <span class="number">0</span> <span class="number">0</span>, <span class="number">0</span> <span class="number">100</span>%, <span class="number">0</span> <span class="number">0</span>%, <span class="number">100</span>% <span class="number">0</span>;</span><br><span class="line">        animation: linearGradientMove <span class="number">.3</span>s linear infinite;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-渐变的其他用法"><a href="#3-渐变的其他用法" class="headerlink" title="3. 渐变的其他用法"></a>3. 渐变的其他用法</h4><p>利用渐变，我们还能实现效果</p>
+<p>如下图</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0wwh82jxg30ey0a2gn8.gif" width="500px"><br></image></div>
+
+
+<p>先用渐变实现一个下图的元素</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0wr48yzyj30fu09yaa8.jpg" width="500px"><br></image></div>
+
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.con4</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background</span>: linear-gradient(<span class="number">#399953</span>, <span class="number">#399953</span>),  linear-gradient(<span class="number">#fbb300</span>, <span class="number">#fbb300</span>), linear-gradient(<span class="number">#d53e33</span>, <span class="number">#d53e33</span>), linear-gradient(<span class="number">#377af5</span>, <span class="number">#377af5</span>);</span><br><span class="line">        <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">        <span class="attribute">background-size</span>: <span class="number">50%</span> <span class="number">50%</span>, <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>, <span class="number">100%</span> <span class="number">0</span>, <span class="number">100%</span> <span class="number">100%</span>, <span class="number">0</span> <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>使用伪元素实现这个元素， 每一个色块都和父元素一样大， 再通过父级的<code>overflow: hidden</code>将超出部分隐藏</p>
+<p>然后， 给色款加上动画效果， 让色块动起来</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0wswfijng30ey0a6n2e.gif" width="500px"><br></image></div>
+
+<p>再添加一个伪元素， 将div内部部分遮住， 即可实现想要的效果，</p>
+<p>为了更直观的观察， 可以给遮罩的伪元素加一个透明度的动画</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0x0fhx74g30g80a4k0c.gif" width="500px"><br></image></div>
+
+<p>最终代码：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> rotate &#123;</span><br><span class="line">	100% &#123;</span><br><span class="line">		<span class="attribute">transform</span>: rotate(<span class="number">1turn</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.con4</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background</span>: linear-gradient(<span class="number">#399953</span>, <span class="number">#399953</span>),  linear-gradient(<span class="number">#fbb300</span>, <span class="number">#fbb300</span>), linear-gradient(<span class="number">#d53e33</span>, <span class="number">#d53e33</span>), linear-gradient(<span class="number">#377af5</span>, <span class="number">#377af5</span>);</span><br><span class="line">        <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">        <span class="attribute">background-size</span>: <span class="number">50%</span> <span class="number">50%</span>, <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>, <span class="number">100%</span> <span class="number">0</span>, <span class="number">100%</span> <span class="number">100%</span>, <span class="number">0</span> <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">animation</span>: rotate <span class="number">4s</span> linear infinite;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: calc(<span class="number">100%</span> - <span class="number">6px</span>);</span><br><span class="line">        <span class="attribute">height</span>: calc(<span class="number">100%</span> - <span class="number">6px</span>);</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">3px</span>;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">3px</span>;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#ffffff</span>;</span><br><span class="line">        <span class="attribute">z-index</span>: <span class="number">2</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现了上面的效果之后， 我们还可以实现一种颜色的效果</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0xeikhycj30bk07k748.jpg" width="500px"><br></image></div>
+
+<p>动起来之后的效果</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0xfn609ag30cm092dgs.gif" width="500px"><br></image></div>
+
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.con5</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background</span>: linear-gradient(<span class="number">#399953</span>, <span class="number">#399953</span>);</span><br><span class="line">        <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">        <span class="attribute">background-size</span>: <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">animation</span>: rotate <span class="number">4s</span> linear infinite;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: calc(<span class="number">100%</span> - <span class="number">6px</span>);</span><br><span class="line">        <span class="attribute">height</span>: calc(<span class="number">100%</span> - <span class="number">6px</span>);</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">3px</span>;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">3px</span>;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#ffffff</span>;</span><br><span class="line">        <span class="attribute">z-index</span>: <span class="number">2</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在动起来的时候， 有的时候两边会出现小三角的情况， 并不是特别的美观</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEgy1gn0xkugnkej30ju07y75w.jpg" width="500px"><br></image></div>
+
+<p>这个时候， 可以使用<code>conic-gradient</code> 实现(详细介绍请通过上文跳转MDN)</p>
+<p>先实现一个角向渐变</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0xy0qmohj30cw07kwf0.jpg" width="500px"><br></image></div>
+
+<p>渐变动起来</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0xzoy9z4g30ac08e1b0.gif" width="500px"><br></image></div>
+
+<p>边框效果</p>
+<div align="center"><br><image src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0y1ekokxg30co09iado.gif" width="500px"><br></image></div>
+
+<p>代码实现<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.con6</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: black;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200%</span>;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">background</span>: conic-gradient(transparent, rgba(<span class="number">168</span>, <span class="number">239</span>, <span class="number">255</span>, <span class="number">1</span>), transparent <span class="number">30%</span>);</span><br><span class="line">        <span class="attribute">animation</span>: rotate <span class="number">4s</span> linear infinite;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: calc(<span class="number">100%</span> - <span class="number">8px</span>);</span><br><span class="line">        <span class="attribute">height</span>: calc(<span class="number">100%</span> - <span class="number">8px</span>);</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">4px</span>;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">4px</span>;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#ffffff</span>;</span><br><span class="line">        <span class="attribute">z-index</span>: <span class="number">2</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
