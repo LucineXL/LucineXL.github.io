@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucine-XL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="LucineXL,"> 
+    <meta name="description" content="我是一个小码农~,"> 
+    <meta name="author" content="Lucine"> 
+    <link rel="alternative" href="atom.xml" title="Lucine-XL" type="application/atom+xml"> 
+    <link rel="icon" href="/img/li.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+    //   (adsbygoogle = window.adsbygoogle || []).push({
+    //     google_ad_client: "ca-pub-8691406134231910",
+    //     enable_page_level_ads: true
+    //   });
+    </script>
+
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">TypeScript 学习笔记</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">TypeScript 学习笔记</h1>
+        <div class="stuff">
+            <span>三月 24, 2021</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ts/">ts</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>最近在学习 ts， 好记性不如烂笔头， 简单记录一下 <code>ts</code> 学习笔记~</p>
+<p><a href="https://www.tslang.cn/docs/home.html" target="_blank" rel="noopener">TypeScript 官方文档 </a> 戳这里~</p>
+<h3 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h3><p>学习一门新的语言， 当然要从 <code>hello world</code> 开始</p>
+<p>快速上手，可以使用 <code>create-react-app</code> 创建一个 ts 的项目</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">create-react-app</span> <span class="string">tsdemo </span><span class="built_in">--template</span> <span class="string">typescript</span></span><br></pre></td></tr></table></figure>
+<p>创建出来的项目结构如下</p>
+<div align="center"><br><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gov2bjoxqwj30du0o0tao.jpg" width="200px"><br></div>
+
+<h3 id="日常类型"><a href="#日常类型" class="headerlink" title="日常类型"></a>日常类型</h3><h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let  <span class="string">isDone:</span> <span class="keyword">boolean</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> <span class="built_in">num</span>: number = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name: <span class="built_in">string</span> = <span class="string">'Jon'</span>;</span><br><span class="line"><span class="keyword">let</span> age:<span class="built_in">number</span> = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">let</span> sentence: <span class="built_in">string</span> = <span class="string">`I am <span class="subst">$&#123;name&#125;</span>, I'm <span class="subst">$&#123;age&#125;</span> years old`</span>;</span><br><span class="line"><span class="comment">// 跟下面的方式等价</span></span><br><span class="line"><span class="keyword">let</span> sentence: <span class="built_in">string</span> = <span class="string">'I am '</span> + name + <span class="string">', I'</span>m <span class="string">' + age + '</span> years old<span class="string">';</span></span><br></pre></td></tr></table></figure>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种定义方式</span></span><br><span class="line">let list: number[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种方式， 使用数组泛型</span></span><br><span class="line">let list: Array&lt;number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<h4 id="any"><a href="#any" class="headerlink" title="any"></a>any</h4><p>any 可以为任意类型。 如果未指定类型， 并且 TypeScript 无法根据上下文推断出变量类型， 编辑器会默认认为任意类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">any</span>;</span><br><span class="line">a = <span class="number">1</span>; <span class="comment">// 正确</span></span><br><span class="line">a = <span class="string">'1'</span>; <span class="comment">// 正确</span></span><br><span class="line">a = <span class="literal">false</span>; <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+<h4 id="变量的类型注释"><a href="#变量的类型注释" class="headerlink" title="变量的类型注释"></a>变量的类型注释</h4><p>我们在使用 let， const， var 定义变量时， 可以选择显示的制定变量的类型， 但是大部分情况下， TypeScript 会自行判断变量类型</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="参数类型注释"><a href="#参数类型注释" class="headerlink" title="参数类型注释"></a>参数类型注释</h5><p>声明函数时，可以在每个参数后面添加类型注释</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span><span class="params">(<span class="keyword">name</span>: <span class="keyword">string</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  console.log("hello" + name);</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">greet</span><span class="params">(<span class="string">'a'</span>)</span>;</span> <span class="comment">// 正确</span></span><br><span class="line">greet(<span class="number">1</span>); <span class="comment">// 错误， 传入参数类型不正确</span></span><br></pre></td></tr></table></figure>
+<h5 id="返回类型注释"><a href="#返回类型注释" class="headerlink" title="返回类型注释"></a>返回类型注释</h5><p>可以在参数列表后面标注函数返回类型注释</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function greet(<span class="built_in">name</span>: <span class="built_in">string</span>): <span class="built_in">string</span> &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">"hello"</span> + <span class="built_in">name</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常不需要特别标注返回类型注释，typeScript 会基于 return 自行判断返回类型</p>
+<h5 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h5><p>匿名函数可以在调用时， 自行获取参数类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> names = [<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Eve"</span>];</span><br><span class="line"></span><br><span class="line">names.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 属性“tolocalelowercase”在类型“string”上不存在。你是否指的是“toLocaleLowerCase”?</span></span><br><span class="line">  <span class="built_in">console</span>.log(item.tolocalelowercase());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h4><p>在定义对象时声明属性及类型</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> print<span class="constructor">Cord(<span class="params">pt</span>: &#123; <span class="params">x</span>: <span class="params">number</span>; <span class="params">y</span>: <span class="params">number</span> &#125;)</span> &#123;</span><br><span class="line">  console.log(<span class="string">"The coordinate's x value is "</span> + pt.x);</span><br><span class="line">  console.log(<span class="string">"The coordinate's y value is "</span> + pt.y);</span><br><span class="line">&#125;</span><br><span class="line">print<span class="constructor">Cord(&#123; <span class="params">x</span>: 3, <span class="params">y</span>: 7 &#125;)</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h5><p>对象类型可指定哪些属性是可选的</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> print<span class="constructor">Name(<span class="params">obj</span>: &#123; <span class="params">first</span>: <span class="params">string</span>; <span class="params">last</span>?: <span class="params">string</span> &#125;)</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print<span class="constructor">Name(&#123; <span class="params">first</span>: <span class="string">"Bob"</span> &#125;)</span>; <span class="comment">// ok</span></span><br><span class="line">print<span class="constructor">Name(&#123; <span class="params">first</span>: <span class="string">"Alice"</span>, <span class="params">last</span>: <span class="string">"Alisson"</span> &#125;)</span>; <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+<p>若属性为可选属性， 在使用前， 需要先对该属性进行校验</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> print<span class="constructor">Name(<span class="params">obj</span>: &#123; <span class="params">first</span>: <span class="params">string</span>; <span class="params">last</span>?: <span class="params">string</span> &#125;)</span> &#123;</span><br><span class="line">    console.log(obj.first.<span class="keyword">to</span><span class="constructor">LocaleLowerCase()</span>)  <span class="comment">// ok</span></span><br><span class="line">    console.log(obj.last.<span class="keyword">to</span><span class="constructor">LocaleLowerCase()</span>)  <span class="comment">// error: 对象可能为“未定义”。</span></span><br><span class="line">    <span class="keyword">if</span>(obj.last !== undefined) &#123;</span><br><span class="line">      console.log(obj.last.<span class="keyword">to</span><span class="constructor">LocaleLowerCase()</span>)  <span class="comment">// ok</span></span><br><span class="line">    &#125;</span><br><span class="line">    console.log(obj.last?.<span class="keyword">to</span><span class="constructor">LocaleLowerCase()</span>)  <span class="comment">// ok</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h4><h5 id="定义联合类型"><a href="#定义联合类型" class="headerlink" title="定义联合类型"></a>定义联合类型</h5><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> print<span class="constructor">Id(<span class="params">id</span>: <span class="params">number</span> | <span class="params">string</span>)</span> &#123;</span><br><span class="line">  console.log(<span class="string">"Your ID is: "</span> + id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print<span class="constructor">Id(101)</span>;  <span class="comment">// OK</span></span><br><span class="line">print<span class="constructor">Id(<span class="string">"202"</span>)</span>; <span class="comment">// OK</span></span><br><span class="line">print<span class="constructor">Id(&#123; <span class="params">myID</span>: 22342 &#125;)</span>; <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<h5 id="处理联合类型"><a href="#处理联合类型" class="headerlink" title="处理联合类型"></a>处理联合类型</h5><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> printId<span class="built_in">(id</span>:<span class="built_in"> number</span> |<span class="built_in"> string</span>) &#123;</span><br><span class="line">  //<span class="built_in"> error</span> 类型<span class="built_in">“string</span> |<span class="built_in"> number</span>”上不存在属性“toUpperCase”。类型<span class="built_in">“number</span>”上不存在属性“toUpperCase”。</span><br><span class="line">  console.log<span class="built_in">(id</span>.toUpperCase());</span><br><span class="line"></span><br><span class="line">  // ok</span><br><span class="line">  <span class="keyword">if</span> (typeof<span class="built_in"> id</span> === <span class="string">"string"</span>) &#123;</span><br><span class="line">    console.log<span class="built_in">(id</span>.toUpperCase());</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    console.log<span class="built_in">(id</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当不同类型拥有共同的方法时，TypeScript 也可正常运行</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组和字符串都有slice方法</span></span><br><span class="line"><span class="keyword">function</span> get<span class="constructor">FirstThree(<span class="params">x</span>: <span class="params">number</span>[] | <span class="params">string</span>)</span> &#123;</span><br><span class="line">  return x.slice(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h4><p>我们通常会多次使用同一个类型，这时，就可以给这个类型起一个别名并且引用他</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">Point </span>= &#123;</span><br><span class="line">  x: number,</span><br><span class="line">  y: number,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title">printCord</span>(pt: Point) &#123;</span><br><span class="line">  console.log("The coordinate's x value <span class="keyword">is</span> <span class="string">" + pt.x);</span></span><br><span class="line"><span class="string">  console.log("</span>The coordinate<span class="symbol">'s</span> y value <span class="keyword">is</span> <span class="string">" + pt.y);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">printCord(&#123; x: 10, y: 10&#125;);</span></span><br></pre></td></tr></table></figure>
+<p>除了使用类型别名给对象起别名， 其他任何类型都可以</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type a = number;</span><br><span class="line">type b = string;</span><br><span class="line">type c = number | string;</span><br></pre></td></tr></table></figure>
+<p>TypeScript 中, 起别名不是新建一种类型， 只是对之前的类型新建了一个名字， 在使用过程中， 不同类型的不同别名是等价的</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">declare <span class="function"><span class="keyword">function</span> <span class="title">getInput</span><span class="params">()</span></span>: <span class="built_in">string</span>;</span><br><span class="line">declare <span class="function"><span class="keyword">function</span> <span class="title">sanitize</span><span class="params">(str: string)</span></span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span> a = number;</span><br><span class="line"><span class="built_in">type</span> b = <span class="built_in">string</span>;</span><br><span class="line"><span class="built_in">type</span> c = number | <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sanitizeInput</span><span class="params">(str: b)</span></span>: c &#123;</span><br><span class="line">  // <span class="keyword">return</span> sanitize(str);   // ok</span><br><span class="line">  // <span class="keyword">return</span> <span class="number">1</span>;   // ok</span><br><span class="line">  // <span class="keyword">return</span> <span class="string">'1'</span>;  // ok</span><br><span class="line">  // <span class="keyword">return</span> <span class="literal">false</span>;  // <span class="built_in">error</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let userInput = sanitizeInput(getInput());</span><br></pre></td></tr></table></figure>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口声明是命名对象类型的另一种方式</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">interface</span> <span class="selector-tag">Point</span> &#123;</span><br><span class="line">  <span class="attribute">x</span>: number;</span><br><span class="line">  <span class="attribute">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">function</span> <span class="selector-tag">printCord</span>(<span class="attribute">pt</span>: Point) &#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"The coordinate's x value is "</span> + pt.x);</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"The coordinate's y value is "</span> + pt.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">printCord</span>(&#123; <span class="attribute">x</span>: <span class="number">100</span>, <span class="attribute">y</span>: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="类型别名和接口之间的差异"><a href="#类型别名和接口之间的差异" class="headerlink" title="类型别名和接口之间的差异"></a>类型别名和接口之间的差异</h5><p>类型别名和接口都可以对类型进行扩展， 但是不同的是， 接口创建后可以直接添加新类型， 但是类型别名一经创建， 不可更改</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口扩展</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Animal &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Bear <span class="keyword">extends</span> Animal &#123;</span><br><span class="line">  honey: <span class="built_in">boolean</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对animal进行修改</span></span><br><span class="line"><span class="keyword">interface</span> Animal &#123;</span><br><span class="line">  age: <span class="built_in">number</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="function"><span class="keyword">function</span> <span class="title">getBear</span>(<span class="params"></span>): <span class="title">Bear</span></span>;</span><br><span class="line"><span class="keyword">const</span> bear = getBear();</span><br><span class="line">bear.name <span class="comment">// Animal.name: string</span></span><br><span class="line">bear.honey <span class="comment">// Bear.honey: boolean</span></span><br><span class="line">bear.age <span class="comment">//  Animal.age: number  animal类型添加了age属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 扩展类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Animal = &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Bear = Animal &amp; &#123;</span><br><span class="line">  honey: <span class="built_in">boolean</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="function"><span class="keyword">function</span> <span class="title">getBear</span>(<span class="params"></span>): <span class="title">Bear</span></span>;</span><br><span class="line"><span class="keyword">const</span> bear = getBear();</span><br><span class="line">bear.name <span class="comment">// name: string</span></span><br><span class="line">bear.honey <span class="comment">// honey: boolean</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// tips: 若在此处对Animal类型进行扩展， ts会报错提示 标识符“Animal”重复。</span></span><br><span class="line"><span class="keyword">type</span> Animal =  &#123;</span><br><span class="line">  age: <span class="built_in">number</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someValue: <span class="built_in">any</span> = <span class="string">'11'</span>;</span><br><span class="line"><span class="comment">// 类型断言的写法有两种</span></span><br><span class="line"><span class="comment">// 1.  使用&lt;&gt;的方式，  此种方式不能在jsx中使用</span></span><br><span class="line"><span class="keyword">let</span> len: <span class="built_in">number</span> = (&lt;<span class="built_in">string</span>&gt;someValue).length;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  2.使用as的方式</span></span><br><span class="line"><span class="keyword">let</span> str = someValue <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">let</span> len: <span class="built_in">number</span> = (someValue <span class="keyword">as</span> <span class="built_in">string</span>).length;</span><br><span class="line"><span class="built_in">console</span>.log(str, len);</span><br></pre></td></tr></table></figure>
+<h4 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h4><p>除了常规类型<code>string</code>和<code>number</code>之外，我们还可以在类型位置引用特定的字符串和数字。</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let <span class="meta">x</span>: <span class="string">'hello'</span> = <span class="string">'hello'</span>;</span><br><span class="line"><span class="meta">x</span> = <span class="string">'hello'</span>; // ok</span><br><span class="line"><span class="meta">x</span> = <span class="string">'howdy'</span>; // <span class="meta">error</span>  不能将类型“<span class="string">"howdy"</span>”分配给类型“<span class="string">"hello"</span>”</span><br></pre></td></tr></table></figure>
+<p>单独定义一个只有一个值的变量用处不大， 但是可以把文字类型组合成并集使用</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 文字类型组合使用</span></span><br><span class="line"><span class="selector-tag">function</span> <span class="selector-tag">printText</span>(<span class="attribute">s</span>: string, <span class="attribute">alignment</span>: <span class="string">"left"</span> | <span class="string">"right"</span> | <span class="string">"center"</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">printText</span>(<span class="string">"Hello, world"</span>, <span class="string">"left"</span>);</span><br><span class="line"><span class="selector-tag">printText</span>(<span class="string">"G'day, mate"</span>, <span class="string">"centre"</span>); <span class="comment">// error  类型“"centre"”的参数不能赋给类型“"left" | "right" | "center"”的参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 文字类型与其他类型组合使用</span></span><br><span class="line"></span><br><span class="line"> <span class="selector-tag">interface</span> <span class="selector-tag">Options</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: number;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">function</span> <span class="selector-tag">configure</span>(<span class="attribute">x</span>: Options | <span class="string">"auto"</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">configure</span>(&#123; <span class="attribute">width</span>: <span class="number">100</span> &#125;);</span><br><span class="line">  <span class="selector-tag">configure</span>(<span class="string">"auto"</span>);</span><br><span class="line">  <span class="selector-tag">configure</span>(<span class="string">"automatic"</span>); <span class="comment">// error 类型“"automatic"”的参数不能赋给类型“Options | "auto"”的参数。</span></span><br></pre></td></tr></table></figure>
+<h4 id="字面推论"><a href="#字面推论" class="headerlink" title="字面推论"></a>字面推论</h4><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">declare function handleRequest(url: string, method: <span class="string">"<span class="keyword">GET</span>"</span> | <span class="string">"<span class="keyword">POST</span>"</span>): void;</span><br><span class="line">const req = &#123; url: <span class="string">"https://example.com"</span>, method: <span class="string">"<span class="keyword">GET</span>"</span> &#125;;</span><br><span class="line">handleRequest(req.url, req.method); // error 类型“string”的参数不能赋给类型“<span class="string">"<span class="keyword">GET</span>"</span> | <span class="string">"<span class="keyword">POST</span>"</span>”的参数。</span><br></pre></td></tr></table></figure>
+<p>上面的例子中， req.method中推断为string，不是”GET”，所以TypeScript认为他是错误的</p>
+<p>解决办法：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// <span class="number">1</span>. 添加类型断言</span><br><span class="line">// 类型断言改法<span class="number">1</span></span><br><span class="line">const req = &#123; url: <span class="string">"https://example.com"</span>, method: <span class="string">"<span class="keyword">GET</span>"</span> as <span class="string">"<span class="keyword">GET</span>"</span>&#125;;</span><br><span class="line">// 类型断言改法<span class="number">2</span></span><br><span class="line">handleRequest(req.url, req.method as <span class="string">"<span class="keyword">GET</span>"</span>);</span><br><span class="line">//<span class="number">2</span>. 用 as const来将整个对象转换为类型文字：</span><br><span class="line">const req = &#123; url: <span class="string">"https://example.com"</span>, method: <span class="string">"<span class="keyword">GET</span>"</span> &#125; as const;</span><br></pre></td></tr></table></figure></p>
+<h4 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a>null 和 undefined</h4><p>JavaScript有两个原始值用于表示缺少或未初始化的值：null和undefined。这两种类型的行为取决于<code>strictNullChecks</code>是否开启。</p>
+<p><code>strictNullChecks</code> 开启时，null和undefined只能赋值给void和它们各自，在使用这两种类型的值之前也需要进行检测</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">do</span><span class="constructor">Something(<span class="params">x</span>: <span class="params">string</span> | <span class="params">undefined</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (x<span class="operator"> === </span>undefined) &#123;</span><br><span class="line">    <span class="comment">// do nothing</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    console.log(<span class="string">"Hello, "</span> + x.<span class="keyword">to</span><span class="constructor">UpperCase()</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关闭时， 可以把他们赋值给任意类型</p>
+<p>未完待续~</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='875d3015f05abfc0a79b'
+        data-cs='3192ac1526e44e82c6ff33702190a4123689a827'
+        data-r='LucineXL.github.io'
+        data-o='LucineXL'
+        data-a='LucineXL'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+ -->
+</html>
