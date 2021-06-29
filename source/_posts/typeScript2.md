@@ -50,7 +50,6 @@ ts 学习笔记 第二弹
 
 在 TypeScript 中，函数还可以具有属性。
 
-（官网原话说`In JavaScript, functions can have properties in addition to being callable.`， 不知道是官网写错了还是我的问题， 我试了一下， js 中好像并不能给函数添加属性， 但是 TypeScript 是可以滴~ ）
 
 ```
   type DescribableFunction = {
@@ -170,7 +169,7 @@ ts 学习笔记 第二弹
   }
 ```
 
-上面的例子中， 入参和出参的类型都被约束为{length：number}, 这样看起来是没有问题的， 我的出参满足了类型约束， 那为什么会报错呢， 以为这个不仅要求类型满足{length：number}, 还要保证传入的参数类型与传出的类型一致
+上面的例子中， 入参和出参的类型都被约束为{length：number}, 这样看起来是没有问题的， 我的出参满足了类型约束， 那为什么会报错呢， 因为这个不仅要求类型满足{length：number}, 还要保证传入的参数类型与传出的类型一致
 
 ### 可选参数
 
